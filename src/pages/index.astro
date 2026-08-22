@@ -447,9 +447,7 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
             </div>
             <div>
                 <p>Η γεωλογική έρευνα δίνει τα θεμέλια. Η καθημερινή εμπειρία στο χωράφι επιβεβαιώνει τον κανόνα και αποκαλύπτει τις εξαιρέσεις.</p>
-                <form class="feedback-form" name="terroir-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                    <input type="hidden" name="form-name" value="terroir-feedback" />
-                    <p class="feedback-trap"><label>Μην συμπληρώσετε αυτό το πεδίο: <input name="bot-field" /></label></p>
+                <form class="feedback-form" action="https://formspree.io/f/mrpzdkjg" method="POST">
                     <p class="feedback-intro">Μοιράσου μια παρατήρηση από τον αμπελώνα.</p>
                     <div class="feedback-field">
                         <label for="feedback-message">Τι παρατήρησες στο χωράφι;</label>
