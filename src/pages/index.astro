@@ -14,7 +14,7 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{intro.frontmatter.title}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6b233a;
@@ -38,7 +38,7 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
             margin: 0;
             padding: 0;
         }
-        h1, h2, h3 { font-family: 'Manrope', serif; color: var(--primary); }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; color: var(--primary); }
         h1 { font-size: clamp(2.35rem, 4.5vw, 4.2rem); line-height: 1.02; letter-spacing: -0.03em; }
         h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.1; }
        .site-header {
@@ -58,7 +58,7 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
             backdrop-filter: blur(14px);
         }
         .menu-toggle { display: none; border: 1px solid rgba(107,35,58,0.2); border-radius: 8px; padding: 0.45rem 0.7rem; background: transparent; color: var(--primary); font: inherit; font-size: 0.8rem; font-weight: 800; }
-        .brand { color: var(--primary); font-family: 'Manrope', serif; font-size: 1.1rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+        .brand { color: var(--primary); font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
         .main-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.35rem; }
         .main-nav a { color: var(--text); padding: 0.45rem 0.7rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700; text-decoration: none; transition: color 0.2s, background 0.2s; }
         .main-nav a:hover, .main-nav a:focus-visible { color: white; background: var(--primary); }
@@ -67,7 +67,7 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
         .intro-section::after { content: ''; position: absolute; right: 0; bottom: 0; width: 35%; height: 1px; background: var(--accent); }
         .eyebrow, .section-kicker { color: var(--accent); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
         .hero-note { border-left: 3px solid var(--accent); padding: 1rem 0 1rem 1.5rem; color: var(--primary-dark); font-size: 0.92rem; }
-        .hero-note strong { display: block; margin-bottom: 0.6rem; color: var(--primary); font-family: 'Manrope', serif; font-size: 1.35rem; }
+        .hero-note strong { display: block; margin-bottom: 0.6rem; color: var(--primary); font-family: 'Manrope', sans-serif; font-size: 1.35rem; }
         .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
         .section-heading h2 { margin: 0; }
         .section-heading p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
@@ -113,8 +113,7 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
             color: white;
             background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.72) 48%, transparent 100%);
         }
-        .text-card h3 { margin: 0 0 0.5rem; color: white; }
-        .text-card p { margin: 0; }
+        .text-card h3 { margin: 0; color: white; }
         .bento-card {
             position: relative;
             border-radius: 16px;
@@ -229,7 +228,6 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
         .feedback-submit { border: 0; border-radius: 999px; padding: 0.75rem 1.1rem; background: var(--primary); color: white; cursor: pointer; font: inherit; font-weight: 800; }
         .feedback-submit:hover { background: var(--primary-dark); }
         .feedback-status { margin: 0.7rem 0 0; color: var(--sage); font-size: 0.8rem; }
-        .feedback-trap { display: none; }
         .site-footer { display: flex; justify-content: space-between; gap: 2rem; padding: 2rem 0 3rem; border-top: 1px solid rgba(107,35,58,0.18); color: #716d65; font-size: 0.82rem; }
         .site-footer a { color: var(--primary); font-weight: 800; }
 
@@ -334,8 +332,8 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
 
         <section id="rocks" class="content-section">
             <div class="section-heading">
-                <div><p class="section-kicker">01 / Ο χάρτης</p><h2>Τα Πετρώματα του Terroir</h2></div>
-                <p>Έξι γεωλογικοί σχηματισμοί και οι ποικιλίες που βρίσκουν πάνω τους τον ρυθμό τους.</p>
+                <div><p class="section-kicker">01 / Ο χάρτης</p><h2>Τα Πετρώματα της Μεσσηνίας</h2></div>
+                <p>Οκτώ γεωλογικοί σχηματισμοί και οι ποικιλίες που βρίσκουν πάνω τους τον ρυθμό τους.</p>
             </div>
         
             <div class="bento-grid">
@@ -383,7 +381,6 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
                             <img src={problem.frontmatter.image} alt={problem.frontmatter.title} loading="lazy" />
                             <div class="text-card-copy">
                                 <h3>{problem.frontmatter.title}</h3>
-                                <p>Πρόβλημα και αντιμετώπιση στον αμπελώνα.</p>
                             </div>
                         </article>
                     );
@@ -418,7 +415,6 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
                             <img src={myth.frontmatter.image} alt="Μύθος" loading="lazy" />
                             <div class="text-card-copy">
                                 <h3>{myth.frontmatter.title}</h3>
-                                <p>{myth.frontmatter.quote}</p>
                             </div>
                         </article>
                     );
@@ -434,6 +430,9 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
                         <button class="close-btn" onclick={`closeModal('${mythId}')`}>✕</button>
                         <img class="modal-image" src={myth.frontmatter.image} alt="Μύθος" />
                         <h2 style="margin-top: 0;">{myth.frontmatter.title}</h2>
+                        <p style="font-size: 1.15rem; font-style: italic; color: var(--primary); font-weight: 600; border-left: 3px solid var(--accent); padding-left: 1rem; margin-bottom: 1.5rem;">
+                            <strong>Ο Μύθος:</strong> «{myth.frontmatter.quote}»
+                        </p>
                         <Fragment set:html={myth.compiledContent()} />
                     </div>
                 </div>
@@ -446,7 +445,7 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
                 <h2>Συμπληρώνοντας τον Χάρτη</h2>
             </div>
             <div>
-                <p>Η γεωλογική έρευνα δίνει τα θεμέλια. Η καθημερινή εμπειρία στο χωράφι επιβεβαιώνει τον κανόνα και αποκαλύπτει τις εξαιρέσεις.</p>
+                <p>Η πραγματική γνώση για το Μεσσηνιακό Terroir δεν γράφεται μέσα στα εργαστήρια. Η γεωλογική έρευνα μας δίνει τα θεμέλια, αλλά η δική σας καθημερινή τριβή με το αμπέλι είναι αυτή που επιβεβαιώνει τον κανόνα ή αποκαλύπτει τη φωτεινή εξαίρεση. Αυτός ο ψηφιακός οδηγός σχεδιάστηκε ως ένας ζωντανός οργανισμός που θα εμπλουτίζεται συνεχώς, και η δική σας εμπειρική γνώση είναι το πιο πολύτιμο κομμάτι του.</p>
                 <form class="feedback-form" action="https://formspree.io/f/mrpzdkjg" method="POST">
                     <p class="feedback-intro">Μοιράσου μια παρατήρηση από τον αμπελώνα.</p>
                     <div class="feedback-field">
@@ -478,7 +477,7 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
         </section>
 
         <footer id="bibliography" class="site-footer">
-            <span>Οδηγός βασισμένος σε έρευνα πεδίου στην Τριφυλία και στη διεθνή βιβλιογραφία γεωλογίας και αμπελουργίας.</span>
+            <span>Ο παρών οδηγός βασίζεται σε εκτεταμένη γεωλογική έρευνα πεδίου στην περιοχή της Μεσσηνίας, καθώς και στη μελέτη της διεθνούς βιβλιογραφίας για την αλληλεπίδραση γεωλογίας και αμπελουργίας.</span>
             <a href="#intro">Βιβλιογραφία &amp; Μεθοδολογία ↑</a>
         </footer>
     </main>

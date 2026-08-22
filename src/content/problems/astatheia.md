@@ -1,6 +1,5 @@
 ---
 title: "Αστάθεια Πρανών και Κατολισθήσεις"
-image: "https://commons.wikimedia.org/wiki/Special:FilePath/Landslide%20scar%2C%20Oeschinensee.jpg?width=900"
+image: "/images/astatheia.jpg"
 ---
-
 Σε περιοχές με απότομες πλαγιές, πετρώματα όπως ο Φλύσχης είναι διαβόητα για την αστάθειά τους όταν κορεστούν με χειμερινές βροχές, απαιτώντας πολύ προσεκτική χωματουργική διαχείριση.
