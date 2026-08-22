@@ -14,7 +14,7 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{intro.frontmatter.title}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6b233a;
@@ -38,7 +38,7 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
             margin: 0;
             padding: 0;
         }
-        h1, h2, h3 { font-family: 'Merriweather', serif; color: var(--primary); }
+        h1, h2, h3 { font-family: 'Alegreya', serif; color: var(--primary); }
         h1 { font-size: clamp(2.35rem, 4.5vw, 4.2rem); line-height: 1.02; letter-spacing: -0.03em; }
         h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.1; }
        .site-header {
@@ -58,7 +58,7 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
             backdrop-filter: blur(14px);
         }
         .menu-toggle { display: none; border: 1px solid rgba(107,35,58,0.2); border-radius: 8px; padding: 0.45rem 0.7rem; background: transparent; color: var(--primary); font: inherit; font-size: 0.8rem; font-weight: 800; }
-        .brand { color: var(--primary); font-family: 'Merriweather', serif; font-size: 1.1rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+        .brand { color: var(--primary); font-family: 'Alegreya', serif; font-size: 1.1rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
         .main-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.35rem; }
         .main-nav a { color: var(--text); padding: 0.45rem 0.7rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700; text-decoration: none; transition: color 0.2s, background 0.2s; }
         .main-nav a:hover, .main-nav a:focus-visible { color: white; background: var(--primary); }
@@ -66,7 +66,7 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
         .intro-section { position: relative; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.6fr); gap: 4rem; align-items: end; margin-bottom: 7rem; padding: 5rem 0 3rem; }
         .intro-section::after { content: ''; position: absolute; right: 0; bottom: 0; width: 35%; height: 1px; background: var(--accent); }
         .eyebrow, .section-kicker { color: var(--accent); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
-        .hero-note { border-left: 3px solid var(--accent); padding: 1rem 0 1rem 1.5rem; color: var(--primary-dark); font-size: 0.92rem; }
+        .hero-note strong { display: block; margin-bottom: 0.6rem; color: var(--primary); font-family: 'Alegreya', serif; font-size: 1.35rem; }
         .hero-note strong { display: block; margin-bottom: 0.6rem; color: var(--primary); font-family: 'Merriweather', serif; font-size: 1.35rem; }
         .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
         .section-heading h2 { margin: 0; }
