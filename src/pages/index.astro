@@ -481,9 +481,9 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             </div>
             
             <div class="gallery-track" style="padding-left: 2rem; padding-right: 2rem;">
-                {galleryImages.map((fileName) => (
+                {galleryImages.map((imageObj: any) => (
                     <figure class="gallery-item">
-                        <img src={fileName} alt="Έρευνα Πεδίου" loading="lazy" />
+                        <img src={imageObj.src} alt="Έρευνα Πεδίου" loading="lazy" />
                     </figure>
                 ))}
             </div>
