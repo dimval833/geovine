@@ -6,6 +6,7 @@ const intro = introFiles[0] as any;
 const rocks = Object.values(import.meta.glob('../content/rocks/*.md', { eager: true })) as any[];
 const problems = Object.values(import.meta.glob('../content/problems/*.md', { eager: true })) as any[];
 const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: true })) as any[];
+const galleryImages = Object.keys(import.meta.glob('gallery/*.{jpg,jpeg,png,webp}'));
 ---
 
 <!DOCTYPE html>
@@ -73,6 +74,37 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
         .section-heading h2 { margin: 0; }
         .section-heading p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
         .content-section { scroll-margin-top: 6rem; margin-bottom: 7rem; }
+
+
+        .gallery-section { padding: 0 0 4rem; overflow: hidden; margin-bottom: 5rem; }
+        .gallery-track { 
+            display: flex; 
+            gap: 1.5rem; 
+            overflow-x: auto; 
+            padding-bottom: 1.5rem; 
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; 
+        }
+        .gallery-track::-webkit-scrollbar { display: none; }
+        .gallery-item {
+            flex: 0 0 85%;
+            max-width: 500px;
+            scroll-snap-align: center;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            margin: 0;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+        @media (min-width: 900px) {
+            .gallery-item { flex: 0 0 40%; }
+        }
+
 
         .bento-grid {
             display: grid;
@@ -440,6 +472,28 @@ const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: t
                 </div>
             );
         })}
+
+        {galleryImages.length > 0 && (
+        <section id="gallery" class="gallery-section">
+            <div class="section-heading" style="padding: 0 2rem; max-width: 1200px; margin: 0 auto 2rem;">
+                <div><p class="section-kicker">Εργαστήριο</p><h2>Η Έρευνα στο Πεδίο</h2></div>
+                <p>Στιγμιότυπα από τις γεωλογικές αναλύσεις και τη χαρτογράφηση του Μεσσηνιακού αμπελώνα.</p>
+            </div>
+            
+            <div class="gallery-track" style="padding-left: 2rem; padding-right: 2rem;">
+                {galleryImages.map((imgPath) => {
+                    // Αφαιρούμε το '/public' για να βρίσκει ο browser σωστά την εικόνα
+                    const finalPath = imgPath.replace('/public', '');
+                    return (
+                        <figure class="gallery-item">
+                            <img src={finalPath} alt="Φωτογραφία Έρευνας Πεδίου" loading="lazy" />
+                        </figure>
+                    );
+                })}
+            </div>
+        </section>
+        )}
+
 
         <section id="field-notes" class="field-section">
             <div>
