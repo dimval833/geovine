@@ -3,6 +3,9 @@
 const introFiles = Object.values(import.meta.glob('../content/intro.md', { eager: true }));
 const intro = introFiles[0] as any;
 
+const aboutFiles = Object.values(import.meta.glob('../content/about.md', { eager: true }));
+const about = aboutFiles[0] as any;
+
 const rocks = Object.values(import.meta.glob('../content/rocks/*.md', { eager: true })) as any[];
 const problems = Object.values(import.meta.glob('../content/problems/*.md', { eager: true })) as any[];
 const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: true })) as any[];
@@ -14,7 +17,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{intro.frontmatter.title}</title>
+    <title>Οδηγός Εδάφους για τον Μεσσηνιακό Αμπελώνα | GeoVine</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -60,39 +63,40 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             backdrop-filter: blur(14px);
         }
         .menu-toggle { display: none; border: 1px solid rgba(107,35,58,0.2); border-radius: 8px; padding: 0.45rem 0.7rem; background: transparent; color: var(--primary); font: inherit; font-size: 0.8rem; font-weight: 800; }
-        .brand { color: var(--primary); font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
         .main-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.35rem; }
         .main-nav a { color: var(--text); padding: 0.45rem 0.7rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700; text-decoration: none; transition: color 0.2s, background 0.2s; }
         .main-nav a:hover, .main-nav a:focus-visible { color: white; background: var(--primary); }
         .container { box-sizing: border-box; width: 100%; max-width: 1200px; margin: 0 auto; padding: 3rem 2rem 0; }
-        .intro-section { position: relative; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.6fr); gap: 4rem; align-items: end; margin-bottom: 7rem; padding: 5rem 0 3rem; }
-        .intro-section::after { content: ''; position: absolute; right: 0; bottom: 0; width: 35%; height: 1px; background: var(--accent); }
+        
+        /* Νέο Hero Section (Μινιμαλ για να φαίνονται οι κάρτες) */
+        .hero-section {
+            padding: 7rem 0 3rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero-section h1 { margin: 0.5rem 0 1rem; }
+        .hero-section p.subtitle { font-size: 1.15rem; color: #555; max-width: 700px; margin: 0 auto; }
         .eyebrow, .section-kicker { color: var(--accent); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
-        .hero-note { border-left: 3px solid var(--accent); padding: 1rem 0 1rem 1.5rem; color: var(--primary-dark); font-size: 0.92rem; }
-        .hero-note strong { display: block; margin-bottom: 0.6rem; color: var(--primary); font-family: 'Manrope', sans-serif; font-size: 1.35rem; }
+        
         .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
         .section-heading h2 { margin: 0; }
         .section-heading p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
         .content-section { scroll-margin-top: 6rem; margin-bottom: 7rem; }
 
-
-        .gallery-section { padding: 0 0 4rem; overflow: hidden; margin-bottom: 5rem; }
+        .gallery-section { padding: 3rem 0; overflow: hidden; }
         .gallery-track { 
             display: flex; 
             gap: 1.5rem; 
             overflow-x: auto; 
             padding-bottom: 1.5rem; 
             scroll-snap-type: x mandatory;
-            /* ΝΕΟ: Εμφανίζουμε τη μπάρα διακριτικά για τα PC */
             scrollbar-width: thin; 
             scrollbar-color: rgba(107,35,58,0.3) transparent;
         }
-        
-        /* ΝΕΟ: Σχεδιασμός της μπάρας για browsers τύπου Chrome/Safari */
         .gallery-track::-webkit-scrollbar { height: 8px; }
         .gallery-track::-webkit-scrollbar-track { background: transparent; }
         .gallery-track::-webkit-scrollbar-thumb { background: rgba(107,35,58,0.3); border-radius: 4px; }
-        
         .gallery-item {
             flex: 0 0 85%;
             max-width: 500px;
@@ -104,7 +108,6 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         }
         .gallery-item img {
             width: 100%;
-            /* ΝΕΟ: Κλειδώνουμε τις αναλογίες για να μην παραμορφώνονται στα κινητά */
             height: auto;
             aspect-ratio: 4 / 3; 
             object-fit: cover;
@@ -113,7 +116,6 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         @media (min-width: 900px) {
             .gallery-item { flex: 0 0 40%; }
         }
-
 
         .bento-grid {
             display: grid;
@@ -270,12 +272,51 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .feedback-submit { border: 0; border-radius: 999px; padding: 0.75rem 1.1rem; background: var(--primary); color: white; cursor: pointer; font: inherit; font-weight: 800; }
         .feedback-submit:hover { background: var(--primary-dark); }
         .feedback-status { margin: 0.7rem 0 0; color: var(--sage); font-size: 0.8rem; }
+        
+        /* Νέο CSS για το About & Logos */
+        .about-project {
+            padding: 5rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(107,35,58,0.18);
+        }
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .about-content p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .partner-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px dashed rgba(107,35,58,0.15);
+        }
+        .partner-logo {
+            flex: 1 1 200px;
+            display: flex;
+            justify-content: center;
+        }
+        .partner-logo img {
+            max-height: 75px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
         .site-footer { display: flex; justify-content: space-between; gap: 2rem; padding: 2rem 0 3rem; border-top: 1px solid rgba(107,35,58,0.18); color: #716d65; font-size: 0.82rem; }
         .site-footer a { color: var(--primary); font-weight: 800; }
 
         @media (max-width: 900px) {
             .bento-grid, .text-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .intro-section { grid-template-columns: 1fr; gap: 1rem; }
+            .hero-section { padding: 6rem 1rem 2rem; }
         }
 
 		@media (max-width: 900px) {
@@ -309,16 +350,9 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 				overflow-y: auto;
 				padding-bottom: 1rem;
 			}
-			.main-nav.is-open { 
-				display: flex; 
-			}
-			.main-nav a { 
-				padding: 0.65rem 0.85rem; 
-				border-radius: 7px; 
-				font-size: 0.85rem; 
-			}
-			.container { padding: 5.5rem 1rem 0; }
-			.intro-section { padding: 3rem 0 2rem; margin-bottom: 5rem; }
+			.main-nav.is-open { display: flex; }
+			.main-nav a { padding: 0.65rem 0.85rem; border-radius: 7px; font-size: 0.85rem; }
+			.container { padding: 2rem 1rem 0; }
 			.section-heading { display: block; }
 			.section-heading p { margin-top: 0.7rem; }
 			.field-section { grid-template-columns: 1fr; gap: 1rem; }
@@ -327,6 +361,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 			.site-footer span { display: block; margin-bottom: 0.5rem; }
 			.bento-grid, .text-grid { grid-template-columns: 1fr; }
 			.bento-card, .text-card { min-height: 420px; aspect-ratio: auto; }
+            .partner-banner { flex-direction: column; gap: 3rem; }
 			.modal-backdrop { align-items: center; justify-content: center; padding: 1rem; box-sizing: border-box; }
 			.modal-content {
 				width: 100%;
@@ -350,32 +385,29 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         <a href="#" style="margin-right: auto; display: flex; align-items: center;"><img src="paleo.png" alt="Λογότυπο" style="height: 42px; width: auto;" /></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Μενού</button>
         <nav id="main-navigation" class="main-nav" aria-label="Κύρια sections">
-            <a href="#intro">Εισαγωγή</a>
+            <!-- Νέο Μενού -->
             <a href="#rocks">Πετρώματα</a>
+            <a href="#terroir">Το Terroir</a>
             <a href="#problems">Προβλήματα</a>
             <a href="#myths">Μύθοι</a>
             <a href="#field-notes">Πεδίο</a>
-            <a href="#bibliography">Βιβλιογραφία</a>
+            <a href="#about">Το Έργο</a>
         </nav>
     </header>
 
     <main class="container">
         
-        <section id="intro" class="intro-section">
-            <div>
-                <p class="eyebrow">Γεωλογία • Αμπελουργία • Μεσσηνία</p>
-                <h1>{intro.frontmatter.title}</h1>
-                <Fragment set:html={intro.compiledContent()} />
-            </div>
-            <aside class="hero-note">
-                <strong>Το terroir αρχίζει κάτω από την επιφάνεια.</strong>
-                Νερό, θερμοκρασία, κλίση και βάθος ρίζας αποκαλύπτουν τη συμπεριφορά κάθε αμπελώνα.
-            </aside>
+        <!-- Ενότητα 1: Το Νέο Minimal Intro (Hero) -->
+        <section id="hero" class="hero-section">
+            <p class="eyebrow">Γεωλογία • Αμπελουργία • Μεσσηνία</p>
+            <h1>Οδηγός Εδάφους για τον Μεσσηνιακό Αμπελώνα</h1>
+            <p class="subtitle">Ένα πρακτικό εργαλείο για το πώς το πέτρωμα επηρεάζει τη ρίζα, το νερό και τη συμπεριφορά του αμπελιού σας.</p>
         </section>
 
+        <!-- Ενότητα 2: Τα Πετρώματα (Ανέβηκαν πάνω για να φαίνονται άμεσα) -->
         <section id="rocks" class="content-section">
             <div class="section-heading">
-                <div><p class="section-kicker">01 / Ο οδηγός</p><h2>Τα Πετρώματα της Μεσσηνίας</h2></div>
+                <div><p class="section-kicker">01 / Ο πρακτικος οδηγος</p><h2>Τα Πετρώματα της Μεσσηνίας</h2></div>
                 <p>Οκτώ γεωλογικοί σχηματισμοί και προτεινόμενες ποικιλίες.</p>
             </div>
         
@@ -411,9 +443,39 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             );
         })}
 
+        <!-- Ενότητα 3: Η Θεωρία (Το παλιό Intro) + Χάρτης + Gallery -->
+        <section id="terroir" class="content-section">
+            <div class="section-heading">
+                <div><p class="section-kicker">02 / Η Ερευνα</p><h2>{intro.frontmatter.title}</h2></div>
+            </div>
+            
+            <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" loading="lazy" style="width: 100%; border-radius: 12px; margin-bottom: 2.5rem; box-shadow: 0 8px 30px rgba(0,0,0,0.06);" />
+            
+            <div style="font-size: 1.05rem; color: var(--text); max-width: 900px; margin-bottom: 3rem;">
+                <Fragment set:html={intro.compiledContent()} />
+            </div>
+
+            {galleryImages.length > 0 && (
+            <div class="gallery-section">
+                <div class="section-heading" style="margin-bottom: 2rem;">
+                    <div><p class="section-kicker">Εργαστηριο</p><h3>Η Έρευνα στο Πεδίο</h3></div>
+                    <p>Στιγμιότυπα από τις γεωλογικές έρευνες και τη χαρτογράφηση του Μεσσηνιακού terroir.</p>
+                </div>
+                <div class="gallery-track">
+                    {galleryImages.map((imageObj: any) => (
+                        <figure class="gallery-item">
+                            <img src={imageObj.src} alt="Έρευνα Πεδίου" loading="lazy" />
+                        </figure>
+                    ))}
+                </div>
+            </div>
+            )}
+        </section>
+
+        <!-- Ενότητα 4: Προβλήματα -->
         <section id="problems" class="content-section">
             <div class="section-heading">
-                <div><p class="section-kicker">02 / Στο πεδίο</p><h2>Κρίσιμα Γεωλογικά Προβλήματα</h2></div>
+                <div><p class="section-kicker">03 / Στο πεδιο</p><h2>Κρίσιμα Γεωλογικά Προβλήματα</h2></div>
                 <p>Οι συνθήκες που δοκιμάζουν τη ρίζα, το έδαφος και τη διαχείριση του αμπελώνα.</p>
             </div>
             <div class="text-grid">
@@ -445,9 +507,10 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             );
         })}
 
+        <!-- Ενότητα 5: Μύθοι -->
         <section id="myths" class="content-section">
             <div class="section-heading">
-                <div><p class="section-kicker">03 / Η απομυθοποίηση</p><h2>Μύθοι και Αλήθειες</h2></div>
+                <div><p class="section-kicker">04 / Η απομυθοποιηση</p><h2>Μύθοι και Αλήθειες</h2></div>
                 <p>Τι δεν μεταφέρει ο βράχος στο ποτήρι και τι πραγματικά ρυθμίζει.</p>
             </div>
             <div class="text-grid">
@@ -482,27 +545,10 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             );
         })}
 
-        {galleryImages.length > 0 && (
-        <section id="gallery" class="gallery-section">
-            <div class="section-heading" style="padding: 0 2rem; max-width: 1200px; margin: 0 auto 2rem;">
-                <div><p class="section-kicker">Εργαστήριο</p><h2>Η Έρευνα στο Πεδίο</h2></div>
-                <p>Στιγμιότυπα από τις γεωλογικές αναλύσεις και τη χαρτογράφηση του Μεσσηνιακού αμπελώνα.</p>
-            </div>
-            
-            <div class="gallery-track" style="padding-left: 2rem; padding-right: 2rem;">
-                {galleryImages.map((imageObj: any) => (
-                    <figure class="gallery-item">
-                        <img src={imageObj.src} alt="Έρευνα Πεδίου" loading="lazy" />
-                    </figure>
-                ))}
-            </div>
-        </section>
-        )}
-
-
+        <!-- Ενότητα 6: Φόρμα (Πεδίο) -->
         <section id="field-notes" class="field-section">
             <div>
-                <p class="section-kicker">04 / Η ζωντανή γνώση</p>
+                <p class="section-kicker">05 / Η ζωντανη γνωση</p>
                 <h2>Συμπληρώνοντας τον Οδηγό</h2>
             </div>
             <div>
@@ -537,9 +583,30 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             </div>
         </section>
 
+        <!-- Ενότητα 7 & 8: About & Λογότυπα (Η Σφραγίδα) -->
+        <section id="about" class="about-project">
+            <div class="about-content">
+                <p class="section-kicker">Σχετικα με το Εργο</p>
+                <h2>{about.frontmatter.title}</h2>
+                <Fragment set:html={about.compiledContent()} />
+                
+                <div class="partner-banner">
+                    <div class="partner-logo">
+                        <img src="logo-ikbkk.png" alt="Ίδρυμα Καπετάν Βασίλη & Κάρμεν Κωνσταντακόπουλου" loading="lazy" />
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo-messinia.png" alt="Messinia Terroirs" loading="lazy" />
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo-patras.png" alt="Πανεπιστήμιο Πατρών - Εργαστήριο Παλαιοντολογίας & Στρωματογραφίας" loading="lazy" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <footer id="bibliography" class="site-footer">
             <span>Ο παρών οδηγός βασίζεται σε εκτεταμένη γεωλογική έρευνα πεδίου στην περιοχή της Μεσσηνίας, καθώς και στη μελέτη της διεθνούς βιβλιογραφίας για την αλληλεπίδραση γεωλογίας και αμπελουργίας.</span>
-            <a href="#intro">Βιβλιογραφία &amp; Μεθοδολογία ↑</a>
+            <a href="#">Επιστροφή στην κορυφή ↑</a>
         </footer>
     </main>
 
