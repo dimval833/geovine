@@ -1,6 +1,6 @@
 ---
-title: "Ασβεστόλιθοι"
-image: "/images/asvestolithoi.jpg"
+title: "Ασβεστόλιθος"
+image: "/images/asvestolithos.jpg"
 varieties: ["Chardonnay", "Cabernet Sauvignon"]
 ---
 **Χαρακτηριστικά Εδάφους:** Σκληρά εδάφη θαλάσσιας προέλευσης με καλή δομή. Διαθέτουν αλκαλικό pH και εξασφαλίζουν καλή ισορροπία αποστράγγισης.
