@@ -6,7 +6,7 @@ const intro = introFiles[0] as any;
 const rocks = Object.values(import.meta.glob('../content/rocks/*.md', { eager: true })) as any[];
 const problems = Object.values(import.meta.glob('../content/problems/*.md', { eager: true })) as any[];
 const myths = Object.values(import.meta.glob('../content/myths/*.md', { eager: true })) as any[];
-const galleryImages = Object.keys(import.meta.glob('gallery/*.{jpg,jpeg,png,webp}'));
+const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' })) as string[];
 ---
 
 <!DOCTYPE html>
