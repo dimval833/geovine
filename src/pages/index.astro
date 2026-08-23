@@ -481,15 +481,11 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             </div>
             
             <div class="gallery-track" style="padding-left: 2rem; padding-right: 2rem;">
-                {galleryImages.map((imgPath) => {
-                    // Αφαιρούμε το '/public' για να βρίσκει ο browser σωστά την εικόνα
-                    const finalPath = imgPath.replace('/public', '');
-                    return (
-                        <figure class="gallery-item">
-                            <img src={finalPath} alt="Φωτογραφία Έρευνας Πεδίου" loading="lazy" />
-                        </figure>
-                    );
-                })}
+                {galleryImages.map((fileName) => (
+                    <figure class="gallery-item">
+                        <img src={`gallery/${fileName}`} alt="Φωτογραφία Έρευνας Πεδίου" loading="lazy" />
+                    </figure>
+                ))}
             </div>
         </section>
         )}
