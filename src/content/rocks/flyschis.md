@@ -1,6 +1,6 @@
 ---
 title: "Φλύσχης"
-image: "public/images/flyschis.jpg"
+image: "images/flyschis.jpg"
 varieties: ["Cabernet Sauvignon", "Merlot"]
 ---
 **Χαρακτηριστικά Εδάφους:** Σχηματισμός με απότομες εναλλαγές ψαμμίτη (άμμου) και γκρι αργίλου (μπεντονίτης/γλίνα). Είναι μέτριας σκληρότητας.
