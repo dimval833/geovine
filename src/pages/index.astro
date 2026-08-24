@@ -71,12 +71,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .main-nav a:hover, .main-nav a:focus-visible { color: white; background: var(--primary); }
         .container { box-sizing: border-box; width: 100%; max-width: 1200px; margin: 0 auto; padding: 3rem 2rem 0; }
         
-        .hero-section {
-            padding: 7rem 0 3rem;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+        .hero-section { padding: 7rem 0 3rem; text-align: center; max-width: 900px; margin: 0 auto; }
         .hero-section h1 { margin: 0.5rem 0 1rem; }
         .hero-section p.subtitle { font-size: 1.15rem; color: #555; max-width: 700px; margin: 0 auto; }
         .eyebrow, .section-kicker { color: var(--accent); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
@@ -86,167 +81,63 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .section-heading p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
         .content-section { scroll-margin-top: 6rem; margin-bottom: 7rem; }
 
-        .gallery-section { padding: 3rem 0; overflow: hidden; }
-        .gallery-track { 
-            display: flex; 
-            gap: 1.5rem; 
-            overflow-x: auto; 
-            padding-bottom: 1.5rem; 
-            scroll-snap-type: x mandatory;
-            scrollbar-width: thin; 
-            scrollbar-color: rgba(107,35,58,0.3) transparent;
+        /* CSS για το νέο Layout του Terroir (Χάρτης αριστερά) */
+        .terroir-layout {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 3rem;
+            align-items: start;
+            margin-bottom: 3rem;
         }
+        .map-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            cursor: zoom-in;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .map-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        .map-card img { width: 100%; display: block; object-fit: cover; }
+        .map-hint {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+            color: white; padding: 1.5rem 1rem 1rem; text-align: center; font-size: 0.85rem; font-weight: 600;
+        }
+        .terroir-text { font-size: 1.05rem; color: var(--text); }
+
+        .gallery-section { padding: 3rem 0; overflow: hidden; }
+        .gallery-track { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1.5rem; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: rgba(107,35,58,0.3) transparent; }
         .gallery-track::-webkit-scrollbar { height: 8px; }
         .gallery-track::-webkit-scrollbar-track { background: transparent; }
         .gallery-track::-webkit-scrollbar-thumb { background: rgba(107,35,58,0.3); border-radius: 4px; }
-        .gallery-item {
-            flex: 0 0 85%;
-            max-width: 500px;
-            scroll-snap-align: center;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-            margin: 0;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 4 / 3; 
-            object-fit: cover;
-            display: block;
-        }
-        @media (min-width: 900px) {
-            .gallery-item { flex: 0 0 40%; }
-        }
+        .gallery-item { flex: 0 0 85%; max-width: 500px; scroll-snap-align: center; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.06); margin: 0; }
+        .gallery-item img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+        @media (min-width: 900px) { .gallery-item { flex: 0 0 40%; } }
 
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 4rem;
-        }
-        .text-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 4rem;
-        }
-        .text-card {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            aspect-ratio: 4/5;
-            cursor: pointer;
-            text-align: left;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .text-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-        .text-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
+        .bento-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
+        .text-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
+        .text-card { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 4/5; cursor: pointer; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .text-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+        .text-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .text-card:hover img { transform: scale(1.05); }
-        .text-card-copy {
-            position: absolute;
-            inset: auto 0 0;
-            padding: 2.5rem 1.5rem 1.5rem;
-            color: white;
-            background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.72) 48%, transparent 100%);
-        }
+        .text-card-copy { position: absolute; inset: auto 0 0; padding: 2.5rem 1.5rem 1.5rem; color: white; background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.72) 48%, transparent 100%); }
         .text-card h3 { margin: 0; color: white; }
-        .bento-card {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            cursor: pointer;
-            aspect-ratio: 4/5; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
-        }
-        .bento-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-        .bento-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
+        .bento-card { position: relative; border-radius: 16px; overflow: hidden; cursor: pointer; aspect-ratio: 4/5; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease; }
+        .bento-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+        .bento-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .bento-card:hover img { transform: scale(1.05); }
-        .bento-card-title {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.72) 48%, transparent 100%);
-            color: white;
-            padding: 2.5rem 1.5rem 1.5rem;
-            margin: 0;
-            font-size: 1.4rem;
-        }
+        .bento-card-title { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.72) 48%, transparent 100%); color: white; padding: 2.5rem 1.5rem 1.5rem; margin: 0; font-size: 1.4rem; }
 
-        .modal-backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-        .modal-backdrop.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .modal-content {
-            background: var(--card-bg);
-            width: 90%;
-            max-width: 600px;
-            max-height: 85vh;
-            overflow-y: auto;
-            border-radius: 20px;
-            padding: 2.5rem;
-            position: relative;
-            transform: translateY(50px) scale(0.95);
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .modal-image {
-            display: block;
-            width: calc(100% + 5rem);
-            height: 220px;
-            margin: -2.5rem -2.5rem 2rem;
-            object-fit: cover;
-        }
-        .modal-backdrop.active .modal-content {
-            transform: translateY(0) scale(1);
-        }
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: #eee;
-            border: none;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
+        .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .modal-backdrop.active { opacity: 1; pointer-events: auto; }
+        .modal-content { background: var(--card-bg); width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; border-radius: 20px; padding: 2.5rem; position: relative; transform: translateY(50px) scale(0.95); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .modal-image { display: block; width: calc(100% + 5rem); height: 220px; margin: -2.5rem -2.5rem 2rem; object-fit: cover; }
+        .modal-backdrop.active .modal-content { transform: translateY(0) scale(1); }
+        .close-btn { position: absolute; top: 15px; right: 20px; background: #eee; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
         .close-btn:hover { background: #ddd; }
         
         .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
@@ -275,7 +166,6 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .feedback-submit:hover { background: var(--primary-dark); }
         .feedback-status { margin: 0.7rem 0 0; color: var(--sage); font-size: 0.8rem; }
         
-        .biblio-section { padding: 4rem 0; border-top: 1px solid rgba(107,35,58,0.18); }
         .biblio-content { max-width: 900px; margin: 0 auto; color: #555; font-size: 0.9rem; }
         .biblio-content ul { padding-left: 1.5rem; }
         .biblio-content li { margin-bottom: 0.8rem; }
@@ -284,9 +174,12 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .about-project { padding: 5rem 0; margin-top: 3rem; border-top: 1px solid rgba(107,35,58,0.18); }
         .about-content { max-width: 900px; margin: 0 auto; }
         .about-content p { color: #555; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
-        .partner-banner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem; margin-top: 4rem; padding-top: 3rem; border-top: 1px dashed rgba(107,35,58,0.15); }
-        .partner-logo { flex: 1 1 200px; display: flex; justify-content: center; }
-        .partner-logo img { max-height: 75px; width: auto; max-width: 100%; object-fit: contain; }
+        
+        .partner-banner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 3rem; margin-top: 4rem; padding-top: 3rem; border-top: 1px dashed rgba(107,35,58,0.15); }
+        .partner-logo { display: flex; justify-content: center; }
+        
+        /* Κλείδωμα ύψους Λογοτύπων ώστε να είναι όλα αλφάδι */
+        .partner-logo img { height: 75px; width: auto; object-fit: contain; display: block; }
 
         .site-footer { display: flex; justify-content: flex-end; padding: 2rem 0 3rem; border-top: 1px solid rgba(107,35,58,0.18); color: #716d65; font-size: 0.82rem; }
         .site-footer a { color: var(--primary); font-weight: 800; text-decoration: none;}
@@ -294,6 +187,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         @media (max-width: 900px) {
             .bento-grid, .text-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .hero-section { padding: 6rem 1rem 2rem; }
+            .terroir-layout { grid-template-columns: 1fr; gap: 2rem; }
         }
 
 		@media (max-width: 900px) {
@@ -311,7 +205,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 			.site-footer span { display: block; margin-bottom: 0.5rem; }
 			.bento-grid, .text-grid { grid-template-columns: 1fr; }
 			.bento-card, .text-card { min-height: 420px; aspect-ratio: auto; }
-            .partner-banner { flex-direction: column; gap: 3rem; }
+            .partner-banner { gap: 2rem; }
 			.modal-backdrop { align-items: center; justify-content: center; padding: 1rem; box-sizing: border-box; }
 			.modal-content { width: 100%; box-sizing: border-box; max-height: 90vh; max-height: 90dvh; border-radius: 18px; transform: translateY(24px) scale(0.96); padding: 2rem 1.5rem; }
 			.modal-image { width: calc(100% + 3rem); height: 180px; margin: -2rem -1.5rem 1.5rem; }
@@ -323,11 +217,12 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         <a href="#" style="margin-right: auto; display: flex; align-items: center;"><img src="paleo.png" alt="Λογότυπο" style="height: 42px; width: auto;" /></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Μενού</button>
         <nav id="main-navigation" class="main-nav" aria-label="Κύρια sections">
-            <!-- Νέο Μενού -->
+            <!-- Ενημερωμένο Μενού -->
             <a href="#rocks">Πετρώματα</a>
             <a href="#problems">Προβλήματα</a>
             <a href="#myths">Μύθοι</a>
             <a href="#terroir">Το Terroir</a>
+            <a href="#sources">Πηγές</a>
             <a href="#field-notes">Η Εμπειρία Σας</a>
             <a href="#about">Σχετικά</a>
         </nav>
@@ -454,50 +349,66 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             );
         })}
 
-        <!-- Ενότητα 5: Το Terroir & Η Θεωρία -->
+        <!-- Ενότητα 5: Το Terroir & Ο Χάρτης (Κάρτα αριστερά) -->
         <section id="terroir" class="content-section">
-            <div class="section-heading">
+            <div class="section-heading" style="margin-bottom: 2.5rem;">
                 <div><p class="section-kicker">04 / Το Επιστημονικο Υποβαθρο</p><h2>{intro.frontmatter.title}</h2></div>
             </div>
             
-            <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" loading="lazy" style="width: 100%; border-radius: 12px; margin-bottom: 2.5rem; box-shadow: 0 8px 30px rgba(0,0,0,0.06);" />
-            
-            <div style="font-size: 1.05rem; color: var(--text); max-width: 900px; margin-bottom: 3rem;">
-                <Fragment set:html={intro.compiledContent()} />
+            <div class="terroir-layout">
+                <!-- Ο Χάρτης ως διαδραστική κάρτα -->
+                <div class="map-card" onclick="openModal('map-modal')" aria-label="Άνοιγμα χάρτη σε πλήρη οθόνη">
+                    <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" loading="lazy" />
+                    <div class="map-hint">🔍 Πατήστε για μεγέθυνση χάρτη</div>
+                </div>
+                
+                <div class="terroir-text">
+                    <Fragment set:html={intro.compiledContent()} />
+                </div>
             </div>
         </section>
 
-        <!-- Ενότητα 6: Βιβλιογραφία & Πηγές -->
-        <section id="bibliography" class="biblio-section">
-            <div class="biblio-content">
-                <p class="section-kicker">Πηγες & Μελετη</p>
-                <h2>{bibliography.frontmatter.title}</h2>
+        <!-- Modal Popup για τον Χάρτη -->
+        <div id="map-modal" class="modal-backdrop" onclick="closeModal('map-modal')">
+            <div class="modal-content" style="max-width: 900px; padding: 1.5rem;" onclick="event.stopPropagation()">
+                <button class="close-btn" onclick="closeModal('map-modal')">✕</button>
+                <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" style="width: 100%; height: auto; border-radius: 8px; display: block;" />
+            </div>
+        </div>
+
+        <!-- Ενότητα 6: Πηγές (Βιβλιογραφία & Οπτικό Υλικό) Ενοποιημένα -->
+        <section id="sources" class="content-section" style="border-top: 1px solid rgba(107,35,58,0.18); padding-top: 4rem;">
+            <div class="section-heading" style="margin-bottom: 2.5rem;">
+                <div><p class="section-kicker">05 / Τεκμηριωση</p><h2>Πηγές & Μελέτη</h2></div>
+            </div>
+            
+            <!-- Υπο-ενότητα: Βιβλιογραφία -->
+            <div class="biblio-content" style="margin-bottom: 4rem;">
                 <Fragment set:html={bibliography.compiledContent()} />
             </div>
+
+            <!-- Υπο-ενότητα: Gallery -->
+            {galleryImages.length > 0 && (
+            <div class="gallery-section" style="padding: 0;">
+                <div class="section-heading" style="margin-bottom: 1.5rem;">
+                    <div><h3 style="margin:0; font-size: 1.5rem;">Οπτικό Υλικό Πεδίου</h3></div>
+                </div>
+                
+                <div class="gallery-track">
+                    {galleryImages.map((imageObj: any) => (
+                        <figure class="gallery-item">
+                            <img src={imageObj.src} alt="Έρευνα Πεδίου" loading="lazy" />
+                        </figure>
+                    ))}
+                </div>
+            </div>
+            )}
         </section>
 
-        <!-- Ενότητα 7: Gallery (Οπτικές Πηγές Μελέτης) -->
-        {galleryImages.length > 0 && (
-        <section id="gallery" class="gallery-section" style="padding-top: 1rem;">
-            <div class="section-heading" style="padding: 0 2rem; max-width: 1200px; margin: 0 auto 2rem;">
-                <div><p class="section-kicker">Οπτικο Υλικο</p><h2>Η Έρευνα στο Πεδίο</h2></div>
-                <p>Στιγμιότυπα από τις γεωλογικές έρευνες και τη χαρτογράφηση του Μεσσηνιακού terroir.</p>
-            </div>
-            
-            <div class="gallery-track" style="padding-left: 2rem; padding-right: 2rem;">
-                {galleryImages.map((imageObj: any) => (
-                    <figure class="gallery-item">
-                        <img src={imageObj.src} alt="Έρευνα Πεδίου" loading="lazy" />
-                    </figure>
-                ))}
-            </div>
-        </section>
-        )}
-
-        <!-- Ενότητα 8: Φόρμα (Παρατηρήσεις) -->
+        <!-- Ενότητα 7: Φόρμα (Η Εμπειρία σας) -->
         <section id="field-notes" class="field-section">
             <div>
-                <p class="section-kicker">05 / Η ζωντανη γνωση</p>
+                <p class="section-kicker">06 / Η ζωντανη γνωση</p>
                 <h2>Συμπληρώνοντας τον Οδηγό</h2>
             </div>
             <div>
@@ -532,13 +443,14 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             </div>
         </section>
 
-        <!-- Ενότητα 9: About & Λογότυπα (Η Σφραγίδα) -->
+        <!-- Ενότητα 8: About & Λογότυπα (Η Σφραγίδα) -->
         <section id="about" class="about-project">
             <div class="about-content">
                 <p class="section-kicker">Σχετικα με το Εργο</p>
                 <h2>{about.frontmatter.title}</h2>
                 <Fragment set:html={about.compiledContent()} />
                 
+                <!-- 4 Λογότυπα με κλειδωμένο ύψος -->
                 <div class="partner-banner">
                     <div class="partner-logo">
                         <img src="logo-ikbkk.png" alt="Ίδρυμα Καπετάν Βασίλη & Κάρμεν Κωνσταντακόπουλου" loading="lazy" />
@@ -547,7 +459,10 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
                         <img src="logo-messinia.png" alt="Messinia Terroirs" loading="lazy" />
                     </div>
                     <div class="partner-logo">
-                        <img src="logo-patras.png" alt="Πανεπιστήμιο Πατρών - Εργαστήριο Παλαιοντολογίας & Στρωματογραφίας" loading="lazy" />
+                        <img src="logo-patras.png" alt="Πανεπιστήμιο Πατρών" loading="lazy" />
+                    </div>
+                    <div class="partner-logo">
+                        <img src="logo-lab.png" alt="Εργαστήριο Παλαιοντολογίας & Στρωματογραφίας" loading="lazy" />
                     </div>
                 </div>
             </div>
