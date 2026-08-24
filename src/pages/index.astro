@@ -327,9 +327,9 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             <a href="#rocks">Πετρώματα</a>
             <a href="#problems">Προβλήματα</a>
             <a href="#myths">Μύθοι</a>
-            <a href="#terroir">Η Έρευνα</a>
-            <a href="#field-notes">Πεδίο</a>
-            <a href="#about">Το Έργο</a>
+            <a href="#terroir">Το Terroir</a>
+            <a href="#field-notes">Η Εμπειρία Σας</a>
+            <a href="#about">Σχετικά</a>
         </nav>
     </header>
 
@@ -454,7 +454,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             );
         })}
 
-        <!-- Ενότητα 5: Η Θεωρία & Έρευνα Πεδίου -->
+        <!-- Ενότητα 5: Το Terroir & Η Θεωρία -->
         <section id="terroir" class="content-section">
             <div class="section-heading">
                 <div><p class="section-kicker">04 / Το Επιστημονικο Υποβαθρο</p><h2>{intro.frontmatter.title}</h2></div>
@@ -465,25 +465,36 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             <div style="font-size: 1.05rem; color: var(--text); max-width: 900px; margin-bottom: 3rem;">
                 <Fragment set:html={intro.compiledContent()} />
             </div>
-
-            {galleryImages.length > 0 && (
-            <div class="gallery-section">
-                <div class="section-heading" style="margin-bottom: 2rem;">
-                    <div><p class="section-kicker">Εργαστηριο</p><h3>Η Έρευνα στο Πεδίο</h3></div>
-                    <p>Στιγμιότυπα από τις γεωλογικές έρευνες και τη χαρτογράφηση του Μεσσηνιακού terroir.</p>
-                </div>
-                <div class="gallery-track">
-                    {galleryImages.map((imageObj: any) => (
-                        <figure class="gallery-item">
-                            <img src={imageObj.src} alt="Έρευνα Πεδίου" loading="lazy" />
-                        </figure>
-                    ))}
-                </div>
-            </div>
-            )}
         </section>
 
-        <!-- Ενότητα 6: Φόρμα (Πεδίο) -->
+        <!-- Ενότητα 6: Βιβλιογραφία & Πηγές -->
+        <section id="bibliography" class="biblio-section">
+            <div class="biblio-content">
+                <p class="section-kicker">Πηγες & Μελετη</p>
+                <h2>{bibliography.frontmatter.title}</h2>
+                <Fragment set:html={bibliography.compiledContent()} />
+            </div>
+        </section>
+
+        <!-- Ενότητα 7: Gallery (Οπτικές Πηγές Μελέτης) -->
+        {galleryImages.length > 0 && (
+        <section id="gallery" class="gallery-section" style="padding-top: 1rem;">
+            <div class="section-heading" style="padding: 0 2rem; max-width: 1200px; margin: 0 auto 2rem;">
+                <div><p class="section-kicker">Οπτικο Υλικο</p><h2>Η Έρευνα στο Πεδίο</h2></div>
+                <p>Στιγμιότυπα από τις γεωλογικές έρευνες και τη χαρτογράφηση του Μεσσηνιακού terroir.</p>
+            </div>
+            
+            <div class="gallery-track" style="padding-left: 2rem; padding-right: 2rem;">
+                {galleryImages.map((imageObj: any) => (
+                    <figure class="gallery-item">
+                        <img src={imageObj.src} alt="Έρευνα Πεδίου" loading="lazy" />
+                    </figure>
+                ))}
+            </div>
+        </section>
+        )}
+
+        <!-- Ενότητα 8: Φόρμα (Παρατηρήσεις) -->
         <section id="field-notes" class="field-section">
             <div>
                 <p class="section-kicker">05 / Η ζωντανη γνωση</p>
@@ -521,16 +532,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             </div>
         </section>
 
-        <!-- Ενότητα 7: Βιβλιογραφία -->
-        <section id="bibliography" class="biblio-section">
-            <div class="biblio-content">
-                <p class="section-kicker">Πηγες</p>
-                <h2>{bibliography.frontmatter.title}</h2>
-                <Fragment set:html={bibliography.compiledContent()} />
-            </div>
-        </section>
-
-        <!-- Ενότητα 8: About & Λογότυπα (Η Σφραγίδα) -->
+        <!-- Ενότητα 9: About & Λογότυπα (Η Σφραγίδα) -->
         <section id="about" class="about-project">
             <div class="about-content">
                 <p class="section-kicker">Σχετικα με το Εργο</p>

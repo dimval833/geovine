@@ -1,6 +1,8 @@
 ---
 title: "Βιβλιογραφία & Πηγές"
 ---
+Ο παρών οδηγός βασίζεται σε εκτεταμένη γεωλογική έρευνα πεδίου στην περιοχή της Μεσσηνίας, καθώς και στη μελέτη της διεθνούς βιβλιογραφίας για την αλληλεπίδραση γεωλογίας και αμπελουργίας. Για όσους επιθυμούν να εμβαθύνουν, ακολουθούν οι βασικές πηγές της μελέτης μας:
+
 * **BRGM.** (2023). Good land for wine: how geology can influence the quality of wine [Online]. Available at: [brgm.fr](https://www.brgm.fr/en/news/article/good-land-wine-how-geology-can-influence-quality-wine).
 * **Champagnol, F.** (1984). Elements of the physiology of the vine and of general viticulture.
 * **Haynes, S. J.** (1999). Geology and Wine 1. Concept of Terroir and the Role of Geology. *Geoscience Canada*, 26(4).
