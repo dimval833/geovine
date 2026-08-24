@@ -124,11 +124,13 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             scroll-snap-type: x mandatory; 
             scrollbar-width: none; /* Απόκρυψη μπάρας */
             cursor: grab; /* Χεράκι Pan */
+            user-select: none;
+            -webkit-user-select: none;
         }
         .gallery-track::-webkit-scrollbar { display: none; }
         .gallery-track.grabbing { cursor: grabbing; scroll-snap-type: none; } /* Απενεργοποίηση snap στο dragging */
         .gallery-item { flex: 0 0 85%; max-width: 500px; scroll-snap-align: center; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.06); margin: 0; pointer-events: none;}
-        .gallery-item img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block; pointer-events: none; }
+        .gallery-item img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block; pointer-events: none; user-select: none; -webkit-user-select: none; -webkit-user-drag: none;}
         @media (min-width: 900px) { .gallery-item { flex: 0 0 40%; } }
 
         .bento-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
