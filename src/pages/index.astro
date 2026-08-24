@@ -74,14 +74,17 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .hero-section { padding: 7rem 0 3rem; text-align: center; max-width: 900px; margin: 0 auto; }
         .hero-section h1 { margin: 0.5rem 0 1rem; }
         .hero-section p.subtitle { font-size: 1.15rem; color: #555; max-width: 700px; margin: 0 auto; }
-        .eyebrow, .section-kicker { color: var(--accent); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+        
+        /* Διόρθωση 1: Ενιαίο στυλ για όλα τα Section Kickers (01, 02 κλπ) */
+        .eyebrow, .section-kicker { color: var(--accent); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 0.5rem 0; }
         
         .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
         .section-heading h2 { margin: 0; }
-        .section-heading p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
+        /* Διορθώθηκε ώστε να στοχεύει μόνο την περιγραφή, αφήνοντας το kicker ανέπαφο */
+        .section-heading > p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
         .content-section { scroll-margin-top: 6rem; margin-bottom: 7rem; }
 
-        /* CSS για το νέο Layout του Terroir (Χάρτης αριστερά) */
+        /* CSS Layout του Terroir */
         .terroir-layout {
             display: grid;
             grid-template-columns: 0.8fr 1.2fr;
@@ -97,17 +100,13 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             cursor: zoom-in;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .map-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
+        .map-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
         .map-card img { width: 100%; display: block; object-fit: cover; }
-        .map-hint {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
-            color: white; padding: 1.5rem 1rem 1rem; text-align: center; font-size: 0.85rem; font-weight: 600;
-        }
+        .map-hint { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); color: white; padding: 1.5rem 1rem 1rem; text-align: center; font-size: 0.85rem; font-weight: 600; }
+        
+        /* Διόρθωση 2: Ευθυγράμμιση Κειμένου Terroir με τον Χάρτη */
         .terroir-text { font-size: 1.05rem; color: var(--text); }
+        .terroir-text > p:first-of-type { margin-top: 0; }
 
         .gallery-section { padding: 3rem 0; overflow: hidden; }
         .gallery-track { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1.5rem; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: rgba(107,35,58,0.3) transparent; }
@@ -137,14 +136,19 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .modal-content { background: var(--card-bg); width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; border-radius: 20px; padding: 2.5rem; position: relative; transform: translateY(50px) scale(0.95); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
         .modal-image { display: block; width: calc(100% + 5rem); height: 220px; margin: -2.5rem -2.5rem 2rem; object-fit: cover; }
         .modal-backdrop.active .modal-content { transform: translateY(0) scale(1); }
-        .close-btn { position: absolute; top: 15px; right: 20px; background: #eee; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+        
+        /* Διόρθωση 3: Διαδραστικό Zoom στον Χάρτη */
+        .map-zoom-container { width: 100%; overflow: auto; border-radius: 8px; background: #e9e5de; }
+        .zoom-img { width: 100%; height: auto; display: block; cursor: zoom-in; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+        .zoom-img.zoomed { width: 250%; max-width: none; cursor: zoom-out; }
+
+        .close-btn { position: absolute; top: 15px; right: 20px; background: #eee; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 10; }
         .close-btn:hover { background: #ddd; }
         
         .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
         .tag { background: #e9dce0; color: var(--primary); padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.85rem; font-weight: 600; }
         .field-section { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: 3rem; padding: 3rem 0; border-top: 1px solid rgba(107,35,58,0.18); }
         .field-section h2 { margin-top: 0; }
-        .field-section p { margin-top: 0; }
         .field-section a { color: var(--primary); font-weight: 800; }
         .feedback-form { margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.72); border: 1px solid rgba(107,35,58,0.14); border-radius: 14px; }
         .feedback-intro { margin: 0 0 1.25rem; color: var(--primary-dark); font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 700; }
@@ -175,11 +179,29 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .about-content { max-width: 900px; margin: 0 auto; }
         .about-content p { color: #555; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
         
-        .partner-banner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 3rem; margin-top: 4rem; padding-top: 3rem; border-top: 1px dashed rgba(107,35,58,0.15); }
-        .partner-logo { display: flex; justify-content: center; }
-        
-        /* Κλείδωμα ύψους Λογοτύπων ώστε να είναι όλα αλφάδι */
-        .partner-logo img { height: 75px; width: auto; object-fit: contain; display: block; }
+        /* Διόρθωση 4: Λογότυπα σταθερά σε μία γραμμή */
+        .partner-banner { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            flex-wrap: nowrap; /* Απαγορεύει την αλλαγή γραμμής */
+            gap: 1.5rem; 
+            margin-top: 4rem; 
+            padding-top: 3rem; 
+            border-top: 1px dashed rgba(107,35,58,0.15); 
+        }
+        .partner-logo { 
+            flex: 1 1 0; /* Τα αφήνει να μικρύνουν ομοιόμορφα αν χρειαστεί */
+            display: flex; 
+            justify-content: center; 
+        }
+        .partner-logo img { 
+            height: 75px; 
+            width: auto; 
+            max-width: 100%; 
+            object-fit: contain; 
+            display: block; 
+        }
 
         .site-footer { display: flex; justify-content: flex-end; padding: 2rem 0 3rem; border-top: 1px solid rgba(107,35,58,0.18); color: #716d65; font-size: 0.82rem; }
         .site-footer a { color: var(--primary); font-weight: 800; text-decoration: none;}
@@ -188,6 +210,10 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             .bento-grid, .text-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .hero-section { padding: 6rem 1rem 2rem; }
             .terroir-layout { grid-template-columns: 1fr; gap: 2rem; }
+            
+            /* Προσαρμογή λογοτύπων στα κινητά για να χωράνε στην ίδια γραμμή */
+            .partner-banner { gap: 0.5rem; }
+            .partner-logo img { height: 40px; }
         }
 
 		@media (max-width: 900px) {
@@ -198,14 +224,13 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 			.main-nav a { padding: 0.65rem 0.85rem; border-radius: 7px; font-size: 0.85rem; }
 			.container { padding: 2rem 1rem 0; }
 			.section-heading { display: block; }
-			.section-heading p { margin-top: 0.7rem; }
+			.section-heading > p { margin-top: 0.7rem; }
 			.field-section { grid-template-columns: 1fr; gap: 1rem; }
 			.feedback-optional { grid-template-columns: 1fr; gap: 0; }
 			.site-footer { display: block; }
 			.site-footer span { display: block; margin-bottom: 0.5rem; }
 			.bento-grid, .text-grid { grid-template-columns: 1fr; }
 			.bento-card, .text-card { min-height: 420px; aspect-ratio: auto; }
-            .partner-banner { gap: 2rem; }
 			.modal-backdrop { align-items: center; justify-content: center; padding: 1rem; box-sizing: border-box; }
 			.modal-content { width: 100%; box-sizing: border-box; max-height: 90vh; max-height: 90dvh; border-radius: 18px; transform: translateY(24px) scale(0.96); padding: 2rem 1.5rem; }
 			.modal-image { width: calc(100% + 3rem); height: 180px; margin: -2rem -1.5rem 1.5rem; }
@@ -217,7 +242,6 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         <a href="#" style="margin-right: auto; display: flex; align-items: center;"><img src="paleo.png" alt="Λογότυπο" style="height: 42px; width: auto;" /></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Μενού</button>
         <nav id="main-navigation" class="main-nav" aria-label="Κύρια sections">
-            <!-- Ενημερωμένο Μενού -->
             <a href="#rocks">Πετρώματα</a>
             <a href="#problems">Προβλήματα</a>
             <a href="#myths">Μύθοι</a>
@@ -368,11 +392,14 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             </div>
         </section>
 
-        <!-- Modal Popup για τον Χάρτη -->
+        <!-- Modal Popup για τον Χάρτη με Zoom λειτουργία -->
         <div id="map-modal" class="modal-backdrop" onclick="closeModal('map-modal')">
-            <div class="modal-content" style="max-width: 900px; padding: 1.5rem;" onclick="event.stopPropagation()">
+            <div class="modal-content" style="max-width: 1000px; padding: 1.5rem;" onclick="event.stopPropagation()">
                 <button class="close-btn" onclick="closeModal('map-modal')">✕</button>
-                <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" style="width: 100%; height: auto; border-radius: 8px; display: block;" />
+                <div class="map-zoom-container">
+                    <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" class="zoom-img" onclick="this.classList.toggle('zoomed')" title="Πατήστε για ζουμ" />
+                </div>
+                <p style="text-align: center; font-size: 0.8rem; color: #777; margin-top: 1rem;">Πατήστε πάνω στον χάρτη για μεγέθυνση/σμίκρυνση</p>
             </div>
         </div>
 
@@ -450,7 +477,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
                 <h2>{about.frontmatter.title}</h2>
                 <Fragment set:html={about.compiledContent()} />
                 
-                <!-- 4 Λογότυπα με κλειδωμένο ύψος -->
+                <!-- 4 Λογότυπα με κλειδωμένο ύψος και υποχρεωτικά σε μία γραμμή -->
                 <div class="partner-banner">
                     <div class="partner-logo">
                         <img src="logo-ikbkk.png" alt="Ίδρυμα Καπετάν Βασίλη & Κάρμεν Κωνσταντακόπουλου" loading="lazy" />
@@ -499,12 +526,19 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             if(modal) {
                 modal.classList.remove('active');
                 document.body.style.overflow = ''; 
+                // Επαναφορά του ζουμ στον χάρτη αν έχει γίνει
+                const zoomImg = modal.querySelector('.zoom-img');
+                if(zoomImg) zoomImg.classList.remove('zoomed');
             }
         }
         document.addEventListener('keydown', function(event) {
             if (event.key === "Escape") {
                 const activeModal = document.querySelector('.modal-backdrop.active');
-                if (activeModal) activeModal.classList.remove('active');
+                if (activeModal) {
+                    activeModal.classList.remove('active');
+                    const zoomImg = activeModal.querySelector('.zoom-img');
+                    if(zoomImg) zoomImg.classList.remove('zoomed');
+                }
                 document.body.style.overflow = '';
             }
         });
