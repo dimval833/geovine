@@ -75,7 +75,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .hero-section h1 { margin: 0.5rem 0 1rem; }
         .hero-section p.subtitle { font-size: 1.15rem; color: #555; max-width: 700px; margin: 0 auto; }
         
-        /* Κλείδωμα εμφάνισης για όλα τα Kickers (01-06) */
+        /* Ενιαίο στυλ για όλα τα Section Kickers (01-06) */
         p.section-kicker, p.eyebrow { 
             color: var(--accent) !important; 
             font-size: 0.72rem !important; 
@@ -104,23 +104,31 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             cursor: zoom-in;
-            margin-top: 8px; /* Ευθυγράμμιση με το cap-height του κειμένου */
+            margin-top: 6px; /* Ευθυγράμμιση με το cap-height του κειμένου */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .map-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
         .map-card img { width: 100%; display: block; object-fit: cover; }
-        .map-hint { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); color: white; padding: 1.5rem 1rem 1rem; text-align: center; font-size: 0.85rem; font-weight: 600; }
+        .map-hint { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); color: white; padding: 1.5rem 1rem 1rem; text-align: center; font-size: 0.85rem; font-weight: 600; pointer-events: none;}
         
         .terroir-text { font-size: 1.05rem; color: var(--text); }
-        .terroir-text p:first-child { margin-top: 0 !important; }
+        .terroir-text > *:first-child { margin-top: 0 !important; }
 
+        /* Gallery με Drag-to-Pan */
         .gallery-section { padding: 3rem 0; overflow: hidden; }
-        .gallery-track { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1.5rem; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: rgba(107,35,58,0.3) transparent; }
-        .gallery-track::-webkit-scrollbar { height: 8px; }
-        .gallery-track::-webkit-scrollbar-track { background: transparent; }
-        .gallery-track::-webkit-scrollbar-thumb { background: rgba(107,35,58,0.3); border-radius: 4px; }
-        .gallery-item { flex: 0 0 85%; max-width: 500px; scroll-snap-align: center; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.06); margin: 0; }
-        .gallery-item img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+        .gallery-track { 
+            display: flex; 
+            gap: 1.5rem; 
+            overflow-x: auto; 
+            padding-bottom: 1.5rem; 
+            scroll-snap-type: x mandatory; 
+            scrollbar-width: none; /* Απόκρυψη μπάρας */
+            cursor: grab; /* Χεράκι Pan */
+        }
+        .gallery-track::-webkit-scrollbar { display: none; }
+        .gallery-track.grabbing { cursor: grabbing; scroll-snap-type: none; } /* Απενεργοποίηση snap στο dragging */
+        .gallery-item { flex: 0 0 85%; max-width: 500px; scroll-snap-align: center; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.06); margin: 0; pointer-events: none;}
+        .gallery-item img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block; pointer-events: none; }
         @media (min-width: 900px) { .gallery-item { flex: 0 0 40%; } }
 
         .bento-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
@@ -146,10 +154,10 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         
         /* Το Applet του Χάρτη */
         .map-zoom-wrapper { position: relative; width: 100%; height: 65vh; border-radius: 12px; overflow: hidden; background: #e9e5de; box-shadow: inset 0 0 10px rgba(0,0,0,0.1); }
-        .map-zoom-container { width: 100%; height: 100%; overflow: auto; cursor: grab; scrollbar-width: none; }
+        .map-zoom-container { width: 100%; height: 100%; overflow: auto; cursor: grab; scrollbar-width: none; user-select: none; }
         .map-zoom-container::-webkit-scrollbar { display: none; }
         .map-zoom-container.grabbing { cursor: grabbing !important; }
-        .zoom-img { width: 100%; height: auto; display: block; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1); transform-origin: top left; }
+        .zoom-img { width: 100%; height: auto; display: block; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1); transform-origin: top left; pointer-events: none;}
         
         /* Τα Κουμπιά Zoom */
         .map-controls { position: absolute; bottom: 15px; right: 15px; display: flex; flex-direction: column; gap: 8px; z-index: 10; }
@@ -192,7 +200,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .about-content { max-width: 900px; margin: 0 auto; }
         .about-content p { color: #555; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
         
-        /* Ίσα κενά στα λογότυπα ανεξαρτήτως πλάτους */
+        /* Ίσα κενά στα λογότυπα: Κατανομή με space-between, ελεύθερο πλάτος */
         .partner-banner { 
             display: flex; 
             align-items: center; 
@@ -204,9 +212,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             border-top: 1px dashed rgba(107,35,58,0.15); 
         }
         .partner-logo { 
-            flex: 0 0 auto; 
-            display: flex; 
-            justify-content: center; 
+            display: block; 
         }
         .partner-logo img { 
             height: 75px; 
@@ -225,8 +231,8 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             .terroir-layout { grid-template-columns: 1fr; gap: 2rem; }
             .map-card { margin-top: 0; } /* Επαναφορά στο κινητό */
             
-            .partner-banner { gap: 1rem; }
-            .partner-logo img { height: 45px; }
+            .partner-banner { gap: 1rem; justify-content: space-around;}
+            .partner-logo img { height: 40px; }
         }
 
 		@media (max-width: 600px) {
@@ -395,7 +401,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             
             <div class="terroir-layout">
                 <div class="map-card" onclick="openModal('map-modal')" aria-label="Άνοιγμα χάρτη σε πλήρη οθόνη">
-                    <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" loading="lazy" />
+                    <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" loading="lazy" draggable="false" />
                     <div class="map-hint">🔍 Πατήστε για μεγέθυνση χάρτη</div>
                 </div>
                 
@@ -416,7 +422,8 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
                 
                 <div class="map-zoom-wrapper">
                     <div class="map-zoom-container" id="map-scroll-container">
-                        <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" class="zoom-img" id="map-img-zoomable" />
+                        <!-- Το draggable="false" αποτρέπει τη λάθος συμπεριφορά του browser στο σύρσιμο -->
+                        <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" class="zoom-img" id="map-img-zoomable" draggable="false" />
                     </div>
                     <!-- Χειριστήρια Ζουμ -->
                     <div class="map-controls">
@@ -441,12 +448,15 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             <div class="gallery-section" style="padding: 0;">
                 <div class="section-heading" style="margin-bottom: 1.5rem;">
                     <div><h3 style="margin:0; font-size: 1.5rem;">Οπτικό Υλικό Πεδίου</h3></div>
+                    <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #777;">Σύρετε δεξιά/αριστερά για περιήγηση στις φωτογραφίες</p>
                 </div>
                 
-                <div class="gallery-track">
+                <!-- Η Gallery με Drag-to-Pan λειτουργία -->
+                <div class="gallery-track" id="gallery-drag-container">
                     {galleryImages.map((imageObj: any) => (
                         <figure class="gallery-item">
-                            <img src={imageObj.src} alt="Έρευνα Πεδίου" loading="lazy" />
+                            <!-- Απενεργοποιούμε το draggable για να δουλέψει το panning σωστά -->
+                            <img src={imageObj.src} alt="Έρευνα Πεδίου" loading="lazy" draggable="false" />
                         </figure>
                     ))}
                 </div>
@@ -555,37 +565,60 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         }
 
         const mapContainer = document.getElementById('map-scroll-container');
-        let isDown = false;
-        let startX, startY, sLeft, sTop;
+        let isDownMap = false;
+        let startXMap, startYMap, sLeftMap, sTopMap;
 
         if (mapContainer) {
             mapContainer.addEventListener('mousedown', (e) => {
-                isDown = true;
+                isDownMap = true;
                 mapContainer.classList.add('grabbing');
-                startX = e.pageX - mapContainer.offsetLeft;
-                startY = e.pageY - mapContainer.offsetTop;
-                sLeft = mapContainer.scrollLeft;
-                sTop = mapContainer.scrollTop;
+                startXMap = e.pageX - mapContainer.offsetLeft;
+                startYMap = e.pageY - mapContainer.offsetTop;
+                sLeftMap = mapContainer.scrollLeft;
+                sTopMap = mapContainer.scrollTop;
             });
-            mapContainer.addEventListener('mouseleave', () => { isDown = false; mapContainer.classList.remove('grabbing'); });
-            mapContainer.addEventListener('mouseup', () => { isDown = false; mapContainer.classList.remove('grabbing'); });
+            mapContainer.addEventListener('mouseleave', () => { isDownMap = false; mapContainer.classList.remove('grabbing'); });
+            mapContainer.addEventListener('mouseup', () => { isDownMap = false; mapContainer.classList.remove('grabbing'); });
             mapContainer.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
+                if (!isDownMap) return; // Εκτελείται ΑΥΣΤΗΡΑ μόνο όταν κρατάς πατημένο το κλικ
                 e.preventDefault();
                 const x = e.pageX - mapContainer.offsetLeft;
                 const y = e.pageY - mapContainer.offsetTop;
-                mapContainer.scrollLeft = sLeft - (x - startX);
-                mapContainer.scrollTop = sTop - (y - startY);
+                mapContainer.scrollLeft = sLeftMap - (x - startXMap);
+                mapContainer.scrollTop = sTopMap - (y - startYMap);
             });
         }
         // ------------------------------------------------
+
+        // --- ΝΕΟ: Λειτουργικότητα Drag-to-Pan για τη Gallery ---
+        const galleryContainer = document.getElementById('gallery-drag-container');
+        let isDownGallery = false;
+        let startXGallery, sLeftGallery;
+
+        if (galleryContainer) {
+            galleryContainer.addEventListener('mousedown', (e) => {
+                isDownGallery = true;
+                galleryContainer.classList.add('grabbing');
+                startXGallery = e.pageX - galleryContainer.offsetLeft;
+                sLeftGallery = galleryContainer.scrollLeft;
+            });
+            galleryContainer.addEventListener('mouseleave', () => { isDownGallery = false; galleryContainer.classList.remove('grabbing'); });
+            galleryContainer.addEventListener('mouseup', () => { isDownGallery = false; galleryContainer.classList.remove('grabbing'); });
+            galleryContainer.addEventListener('mousemove', (e) => {
+                if (!isDownGallery) return;
+                e.preventDefault();
+                const x = e.pageX - galleryContainer.offsetLeft;
+                const walk = (x - startXGallery) * 1.5; // Ταχύτητα σκρολαρίσματος
+                galleryContainer.scrollLeft = sLeftGallery - walk;
+            });
+        }
+        // --------------------------------------------------------
 
         function closeModal(id) {
             const modal = document.getElementById(id);
             if(modal) {
                 modal.classList.remove('active');
                 document.body.style.overflow = ''; 
-                // Επαναφορά του χάρτη στην αρχική του μορφή όταν κλείνει
                 if (id === 'map-modal') {
                     mapScale = 1;
                     const img = document.getElementById('map-img-zoomable');
