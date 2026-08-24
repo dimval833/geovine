@@ -75,16 +75,22 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .hero-section h1 { margin: 0.5rem 0 1rem; }
         .hero-section p.subtitle { font-size: 1.15rem; color: #555; max-width: 700px; margin: 0 auto; }
         
-        /* Διόρθωση 1: Ενιαίο στυλ για όλα τα Section Kickers (01, 02 κλπ) */
-        .eyebrow, .section-kicker { color: var(--accent); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 0.5rem 0; }
+        /* Κλείδωμα εμφάνισης για όλα τα Kickers (01-06) */
+        p.section-kicker, p.eyebrow { 
+            color: var(--accent) !important; 
+            font-size: 0.72rem !important; 
+            font-weight: 800 !important; 
+            letter-spacing: 0.14em !important; 
+            text-transform: uppercase !important; 
+            margin: 0 0 0.5rem 0 !important; 
+        }
         
         .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
         .section-heading h2 { margin: 0; }
-        /* Διορθώθηκε ώστε να στοχεύει μόνο την περιγραφή, αφήνοντας το kicker ανέπαφο */
         .section-heading > p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
         .content-section { scroll-margin-top: 6rem; margin-bottom: 7rem; }
 
-        /* CSS Layout του Terroir */
+        /* Terroir & Χάρτης */
         .terroir-layout {
             display: grid;
             grid-template-columns: 0.8fr 1.2fr;
@@ -98,15 +104,15 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             cursor: zoom-in;
+            margin-top: 8px; /* Ευθυγράμμιση με το cap-height του κειμένου */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .map-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
         .map-card img { width: 100%; display: block; object-fit: cover; }
         .map-hint { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); color: white; padding: 1.5rem 1rem 1rem; text-align: center; font-size: 0.85rem; font-weight: 600; }
         
-        /* Διόρθωση 2: Ευθυγράμμιση Κειμένου Terroir με τον Χάρτη */
         .terroir-text { font-size: 1.05rem; color: var(--text); }
-        .terroir-text > p:first-of-type { margin-top: 0; }
+        .terroir-text p:first-child { margin-top: 0 !important; }
 
         .gallery-section { padding: 3rem 0; overflow: hidden; }
         .gallery-track { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1.5rem; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: rgba(107,35,58,0.3) transparent; }
@@ -131,25 +137,33 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .bento-card:hover img { transform: scale(1.05); }
         .bento-card-title { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.72) 48%, transparent 100%); color: white; padding: 2.5rem 1.5rem 1.5rem; margin: 0; font-size: 1.4rem; }
 
-        .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        /* Modals & Χάρτης Google Maps Style */
+        .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .modal-backdrop.active { opacity: 1; pointer-events: auto; }
         .modal-content { background: var(--card-bg); width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; border-radius: 20px; padding: 2.5rem; position: relative; transform: translateY(50px) scale(0.95); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
         .modal-image { display: block; width: calc(100% + 5rem); height: 220px; margin: -2.5rem -2.5rem 2rem; object-fit: cover; }
         .modal-backdrop.active .modal-content { transform: translateY(0) scale(1); }
         
-        /* Διόρθωση 3: Διαδραστικό Zoom στον Χάρτη */
-        .map-zoom-container { width: 100%; overflow: auto; border-radius: 8px; background: #e9e5de; }
-        .zoom-img { width: 100%; height: auto; display: block; cursor: zoom-in; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
-        .zoom-img.zoomed { width: 250%; max-width: none; cursor: zoom-out; }
+        /* Το Applet του Χάρτη */
+        .map-zoom-wrapper { position: relative; width: 100%; height: 65vh; border-radius: 12px; overflow: hidden; background: #e9e5de; box-shadow: inset 0 0 10px rgba(0,0,0,0.1); }
+        .map-zoom-container { width: 100%; height: 100%; overflow: auto; cursor: grab; scrollbar-width: none; }
+        .map-zoom-container::-webkit-scrollbar { display: none; }
+        .map-zoom-container.grabbing { cursor: grabbing !important; }
+        .zoom-img { width: 100%; height: auto; display: block; transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1); transform-origin: top left; }
+        
+        /* Τα Κουμπιά Zoom */
+        .map-controls { position: absolute; bottom: 15px; right: 15px; display: flex; flex-direction: column; gap: 8px; z-index: 10; }
+        .map-btn { width: 40px; height: 40px; background: white; color: var(--primary); border: none; border-radius: 8px; font-size: 1.5rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: background 0.2s, transform 0.1s; }
+        .map-btn:hover { background: #f4f0e8; }
+        .map-btn:active { transform: scale(0.95); }
 
-        .close-btn { position: absolute; top: 15px; right: 20px; background: #eee; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 10; }
+        .close-btn { position: absolute; top: 15px; right: 20px; background: #eee; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 20; }
         .close-btn:hover { background: #ddd; }
         
         .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
         .tag { background: #e9dce0; color: var(--primary); padding: 0.4rem 1rem; border-radius: 30px; font-size: 0.85rem; font-weight: 600; }
         .field-section { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: 3rem; padding: 3rem 0; border-top: 1px solid rgba(107,35,58,0.18); }
         .field-section h2 { margin-top: 0; }
-        .field-section a { color: var(--primary); font-weight: 800; }
         .feedback-form { margin-top: 2rem; padding: 1.5rem; background: rgba(255,255,255,0.72); border: 1px solid rgba(107,35,58,0.14); border-radius: 14px; }
         .feedback-intro { margin: 0 0 1.25rem; color: var(--primary-dark); font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 700; }
         .feedback-form label, .feedback-form legend { display: block; margin-bottom: 0.45rem; color: var(--primary-dark); font-size: 0.85rem; font-weight: 800; }
@@ -168,7 +182,6 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .feedback-options .optional-note { display: inline; padding: 0; border: 0; border-radius: 0; background: transparent; color: #777168; cursor: default; }
         .feedback-submit { border: 0; border-radius: 999px; padding: 0.75rem 1.1rem; background: var(--primary); color: white; cursor: pointer; font: inherit; font-weight: 800; }
         .feedback-submit:hover { background: var(--primary-dark); }
-        .feedback-status { margin: 0.7rem 0 0; color: var(--sage); font-size: 0.8rem; }
         
         .biblio-content { max-width: 900px; margin: 0 auto; color: #555; font-size: 0.9rem; }
         .biblio-content ul { padding-left: 1.5rem; }
@@ -179,19 +192,19 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .about-content { max-width: 900px; margin: 0 auto; }
         .about-content p { color: #555; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
         
-        /* Διόρθωση 4: Λογότυπα σταθερά σε μία γραμμή */
+        /* Ίσα κενά στα λογότυπα ανεξαρτήτως πλάτους */
         .partner-banner { 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
-            flex-wrap: nowrap; /* Απαγορεύει την αλλαγή γραμμής */
-            gap: 1.5rem; 
+            flex-wrap: nowrap; 
+            width: 100%;
             margin-top: 4rem; 
             padding-top: 3rem; 
             border-top: 1px dashed rgba(107,35,58,0.15); 
         }
         .partner-logo { 
-            flex: 1 1 0; /* Τα αφήνει να μικρύνουν ομοιόμορφα αν χρειαστεί */
+            flex: 0 0 auto; 
             display: flex; 
             justify-content: center; 
         }
@@ -210,13 +223,13 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             .bento-grid, .text-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .hero-section { padding: 6rem 1rem 2rem; }
             .terroir-layout { grid-template-columns: 1fr; gap: 2rem; }
+            .map-card { margin-top: 0; } /* Επαναφορά στο κινητό */
             
-            /* Προσαρμογή λογοτύπων στα κινητά για να χωράνε στην ίδια γραμμή */
-            .partner-banner { gap: 0.5rem; }
-            .partner-logo img { height: 40px; }
+            .partner-banner { gap: 1rem; }
+            .partner-logo img { height: 45px; }
         }
 
-		@media (max-width: 900px) {
+		@media (max-width: 600px) {
 			.site-header { position: fixed; inset: 0 0 auto; top: 0; z-index: 50; box-sizing: border-box; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65rem; padding: 0.85rem 1rem; background: rgba(244,240,232,0.95); }
 			.menu-toggle { display: block; position: static; }
 			.main-nav { display: none; width: 100%; flex-direction: column; align-items: stretch; gap: 0.15rem; padding-top: 0.35rem; max-height: calc(100vh - 70px); overflow-y: auto; padding-bottom: 1rem; }
@@ -227,13 +240,14 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 			.section-heading > p { margin-top: 0.7rem; }
 			.field-section { grid-template-columns: 1fr; gap: 1rem; }
 			.feedback-optional { grid-template-columns: 1fr; gap: 0; }
-			.site-footer { display: block; }
-			.site-footer span { display: block; margin-bottom: 0.5rem; }
 			.bento-grid, .text-grid { grid-template-columns: 1fr; }
-			.bento-card, .text-card { min-height: 420px; aspect-ratio: auto; }
+			
+            .partner-banner { gap: 0.5rem; justify-content: space-between; }
+            .partner-logo img { height: 32px; }
+            
 			.modal-backdrop { align-items: center; justify-content: center; padding: 1rem; box-sizing: border-box; }
-			.modal-content { width: 100%; box-sizing: border-box; max-height: 90vh; max-height: 90dvh; border-radius: 18px; transform: translateY(24px) scale(0.96); padding: 2rem 1.5rem; }
-			.modal-image { width: calc(100% + 3rem); height: 180px; margin: -2rem -1.5rem 1.5rem; }
+			.modal-content { width: 100%; box-sizing: border-box; max-height: 90vh; max-height: 90dvh; border-radius: 18px; transform: translateY(24px) scale(0.96); padding: 1.5rem 1rem; }
+			.modal-image { width: calc(100% + 2rem); height: 180px; margin: -1.5rem -1rem 1.5rem; }
 		}
     </style>
 </head>
@@ -373,14 +387,13 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             );
         })}
 
-        <!-- Ενότητα 5: Το Terroir & Ο Χάρτης (Κάρτα αριστερά) -->
+        <!-- Ενότητα 5: Το Terroir & Ο Χάρτης -->
         <section id="terroir" class="content-section">
             <div class="section-heading" style="margin-bottom: 2.5rem;">
                 <div><p class="section-kicker">04 / Το Επιστημονικο Υποβαθρο</p><h2>{intro.frontmatter.title}</h2></div>
             </div>
             
             <div class="terroir-layout">
-                <!-- Ο Χάρτης ως διαδραστική κάρτα -->
                 <div class="map-card" onclick="openModal('map-modal')" aria-label="Άνοιγμα χάρτη σε πλήρη οθόνη">
                     <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" loading="lazy" />
                     <div class="map-hint">🔍 Πατήστε για μεγέθυνση χάρτη</div>
@@ -392,29 +405,38 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             </div>
         </section>
 
-        <!-- Modal Popup για τον Χάρτη με Zoom λειτουργία -->
+        <!-- Modal Popup Google Maps Style (Zoom & Pan) -->
         <div id="map-modal" class="modal-backdrop" onclick="closeModal('map-modal')">
             <div class="modal-content" style="max-width: 1000px; padding: 1.5rem;" onclick="event.stopPropagation()">
                 <button class="close-btn" onclick="closeModal('map-modal')">✕</button>
-                <div class="map-zoom-container">
-                    <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" class="zoom-img" onclick="this.classList.toggle('zoomed')" title="Πατήστε για ζουμ" />
+                <div style="margin-bottom: 1rem;">
+                    <h2 style="margin: 0;">Γεωλογικός Χάρτης</h2>
+                    <p style="margin: 0; font-size: 0.85rem; color: #777;">Χρησιμοποιήστε τα κουμπιά + / - και σύρετε την εικόνα για περιήγηση.</p>
                 </div>
-                <p style="text-align: center; font-size: 0.8rem; color: #777; margin-top: 1rem;">Πατήστε πάνω στον χάρτη για μεγέθυνση/σμίκρυνση</p>
+                
+                <div class="map-zoom-wrapper">
+                    <div class="map-zoom-container" id="map-scroll-container">
+                        <img src="map.webp" alt="Γεωλογικός Χάρτης Τριφυλίας" class="zoom-img" id="map-img-zoomable" />
+                    </div>
+                    <!-- Χειριστήρια Ζουμ -->
+                    <div class="map-controls">
+                        <button type="button" class="map-btn" onclick="zoomMap(0.5)" aria-label="Zoom In">+</button>
+                        <button type="button" class="map-btn" onclick="zoomMap(-0.5)" aria-label="Zoom Out">−</button>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Ενότητα 6: Πηγές (Βιβλιογραφία & Οπτικό Υλικό) Ενοποιημένα -->
+        <!-- Ενότητα 6: Πηγές (Βιβλιογραφία & Οπτικό Υλικό) -->
         <section id="sources" class="content-section" style="border-top: 1px solid rgba(107,35,58,0.18); padding-top: 4rem;">
             <div class="section-heading" style="margin-bottom: 2.5rem;">
                 <div><p class="section-kicker">05 / Τεκμηριωση</p><h2>Πηγές & Μελέτη</h2></div>
             </div>
             
-            <!-- Υπο-ενότητα: Βιβλιογραφία -->
             <div class="biblio-content" style="margin-bottom: 4rem;">
                 <Fragment set:html={bibliography.compiledContent()} />
             </div>
 
-            <!-- Υπο-ενότητα: Gallery -->
             {galleryImages.length > 0 && (
             <div class="gallery-section" style="padding: 0;">
                 <div class="section-heading" style="margin-bottom: 1.5rem;">
@@ -470,14 +492,13 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             </div>
         </section>
 
-        <!-- Ενότητα 8: About & Λογότυπα (Η Σφραγίδα) -->
+        <!-- Ενότητα 8: About & Λογότυπα -->
         <section id="about" class="about-project">
             <div class="about-content">
                 <p class="section-kicker">Σχετικα με το Εργο</p>
                 <h2>{about.frontmatter.title}</h2>
                 <Fragment set:html={about.compiledContent()} />
                 
-                <!-- 4 Λογότυπα με κλειδωμένο ύψος και υποχρεωτικά σε μία γραμμή -->
                 <div class="partner-banner">
                     <div class="partner-logo">
                         <img src="LOGO_IKKB.webp" alt="Ίδρυμα Καπετάν Βασίλη & Κάρμεν Κωνσταντακόπουλου" loading="lazy" />
@@ -521,23 +542,68 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
                 document.body.style.overflow = 'hidden'; 
             }
         }
+        
+        // --- Λειτουργικότητα Zoom & Pan για τον Χάρτη ---
+        let mapScale = 1;
+        function zoomMap(step) {
+            mapScale += step;
+            if (mapScale < 1) mapScale = 1;
+            if (mapScale > 4) mapScale = 4;
+            
+            const img = document.getElementById('map-img-zoomable');
+            if(img) img.style.width = (mapScale * 100) + '%';
+        }
+
+        const mapContainer = document.getElementById('map-scroll-container');
+        let isDown = false;
+        let startX, startY, sLeft, sTop;
+
+        if (mapContainer) {
+            mapContainer.addEventListener('mousedown', (e) => {
+                isDown = true;
+                mapContainer.classList.add('grabbing');
+                startX = e.pageX - mapContainer.offsetLeft;
+                startY = e.pageY - mapContainer.offsetTop;
+                sLeft = mapContainer.scrollLeft;
+                sTop = mapContainer.scrollTop;
+            });
+            mapContainer.addEventListener('mouseleave', () => { isDown = false; mapContainer.classList.remove('grabbing'); });
+            mapContainer.addEventListener('mouseup', () => { isDown = false; mapContainer.classList.remove('grabbing'); });
+            mapContainer.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - mapContainer.offsetLeft;
+                const y = e.pageY - mapContainer.offsetTop;
+                mapContainer.scrollLeft = sLeft - (x - startX);
+                mapContainer.scrollTop = sTop - (y - startY);
+            });
+        }
+        // ------------------------------------------------
+
         function closeModal(id) {
             const modal = document.getElementById(id);
             if(modal) {
                 modal.classList.remove('active');
                 document.body.style.overflow = ''; 
-                // Επαναφορά του ζουμ στον χάρτη αν έχει γίνει
-                const zoomImg = modal.querySelector('.zoom-img');
-                if(zoomImg) zoomImg.classList.remove('zoomed');
+                // Επαναφορά του χάρτη στην αρχική του μορφή όταν κλείνει
+                if (id === 'map-modal') {
+                    mapScale = 1;
+                    const img = document.getElementById('map-img-zoomable');
+                    if(img) img.style.width = '100%';
+                }
             }
         }
+        
         document.addEventListener('keydown', function(event) {
             if (event.key === "Escape") {
                 const activeModal = document.querySelector('.modal-backdrop.active');
                 if (activeModal) {
                     activeModal.classList.remove('active');
-                    const zoomImg = activeModal.querySelector('.zoom-img');
-                    if(zoomImg) zoomImg.classList.remove('zoomed');
+                    if (activeModal.id === 'map-modal') {
+                        mapScale = 1;
+                        const img = document.getElementById('map-img-zoomable');
+                        if(img) img.style.width = '100%';
+                    }
                 }
                 document.body.style.overflow = '';
             }
