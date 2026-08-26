@@ -30,7 +30,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             --primary-dark: #401c2b;
             --accent: #b77b45;
             --sage: #75856b;
-            --bg: #ffffff; /* Καθαρό, σύγχρονο λευκό φόντο */
+            --bg: #ffffff;
             --text: #30302d;
             --card-bg: #ffffff;
         }
@@ -48,6 +48,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         h1, h2, h3 { font-family: 'Manrope', sans-serif; color: var(--primary); }
         h1 { font-size: clamp(2.35rem, 4.5vw, 4.2rem); line-height: 1.02; letter-spacing: -0.03em; }
         h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.1; }
+        
        .site-header {
             position: fixed;
             top: 0;
@@ -60,7 +61,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             justify-content: flex-end; 
             gap: 2rem;
             padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.85); /* Πιο αισθητή διαφάνεια */
             border-bottom: 1px solid rgba(107,35,58,0.08);
             backdrop-filter: blur(14px);
         }
@@ -88,19 +89,19 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .section-heading > p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
         .content-section { scroll-margin-top: 6rem; margin-bottom: 7rem; }
 
-        /* ΜΟΝΤΕΡΝΟ SPLIT-SCREEN ΓΙΑ ΤΟ TERROIR (Μισή-μισή οθόνη χωρίς περιθώρια) */
+        /* ΑΚΡΙΒΕΣ SPLIT-SCREEN ΓΙΑ ΤΟ TERROIR (Μισή-μισή οθόνη) */
         .terroir-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            align-items: center;
+            align-items: start;
             margin-bottom: 3rem;
         }
         .map-card {
             position: relative;
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(107,35,58,0.12); /* Λεπτό, καθαρό περίγραμμα αντί για βαριά σκιά */
+            border: 1px solid rgba(107,35,58,0.12);
             cursor: zoom-in;
             margin-top: 0; 
             transition: opacity 0.3s ease;
@@ -109,7 +110,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .map-card img { width: 100%; display: block; object-fit: cover; }
         .map-hint { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); color: white; padding: 1.5rem 1rem 1rem; text-align: center; font-size: 0.85rem; font-weight: 600; pointer-events: none;}
         
-        .terroir-text { font-size: 1.05rem; color: var(--text); }
+        .terroir-text { font-size: 1.05rem; color: var(--text); text-align: left; }
         .terroir-text > *:first-child { margin-top: 0 !important; }
 
         .gallery-section { padding: 3rem 0; overflow: hidden; }
@@ -234,7 +235,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         }
 
 		@media (max-width: 600px) {
-			.site-header { position: fixed; inset: 0 0 auto; top: 0; z-index: 50; box-sizing: border-box; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65rem; padding: 0.85rem 1rem; background: rgba(255, 255, 255, 0.95); }
+			.site-header { position: fixed; inset: 0 0 auto; top: 0; z-index: 50; box-sizing: border-box; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65rem; padding: 0.85rem 1rem; background: rgba(255, 255, 255, 0.85); }
 			.menu-toggle { display: block; position: static; }
 			.main-nav { display: none; width: 100%; flex-direction: column; align-items: stretch; gap: 0.15rem; padding-top: 0.35rem; max-height: calc(100vh - 70px); overflow-y: auto; padding-bottom: 1rem; }
 			.main-nav.is-open { display: flex; }
@@ -284,19 +285,21 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             <p class="subtitle">Ένας πρακτικός οδηγός για το πώς το πέτρωμα επηρεάζει τη ρίζα, το νερό και τη συμπεριφορά του αμπελιού σας.</p>
         </section>
 
-        <!-- Ενότητα 2 (ΠΡΩΗΝ 5): Το Terroir & Ο Χάρτης (Split-Screen Modern Layout) -->
+        <!-- Ενότητα 2: Το Terroir & Ο Χάρτης (Ακριβές Split-Screen 50/50 με τίτλο στα δεξιά) -->
         <section id="terroir" class="content-section">
-            <div class="section-heading" style="margin-bottom: 2.5rem;">
-                <div><p class="section-kicker">01 / Το Επιστημονικο Υποβαθρο</p><h2>{intro.frontmatter.title}</h2></div>
-            </div>
-            
             <div class="terroir-layout">
+                <!-- Αριστερή στήλη: Ο Χάρτης σε πλήρες πλάτος -->
                 <div class="map-card" onclick="openModal('map-modal')" aria-label="Άνοιγμα χάρτη σε πλήρη οθόνη">
                     <img src={`${import.meta.env.BASE_URL}map.webp`} alt="Γεωλογικός Χάρτης Τριφυλίας" loading="lazy" draggable="false" />
                     <div class="map-hint">🔍 Πατήστε για μεγέθυνση χάρτη</div>
                 </div>
                 
+                <!-- Δεξιά στήλη: Τίτλος και κείμενο μαζί -->
                 <div class="terroir-text">
+                    <div style="margin-bottom: 1.5rem;">
+                        <p class="section-kicker">01 / Το Επιστημονικο Υποβαθρο</p>
+                        <h2 style="margin: 0;">{intro.frontmatter.title}</h2>
+                    </div>
                     <Fragment set:html={intro.compiledContent()} />
                 </div>
             </div>
@@ -324,7 +327,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             </div>
         </div>
 
-        <!-- Ενότητα 3 (ΠΡΩΗΝ 2): Τα Πετρώματα -->
+        <!-- Ενότητα 3: Τα Πετρώματα -->
         <section id="rocks" class="content-section">
             <div class="section-heading">
                 <div><p class="section-kicker">02 / Ο πρακτικος οδηγος</p><h2>Πετρώματα της Μεσσηνίας</h2></div>
@@ -373,7 +376,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             );
         })}
 
-        <!-- Ενότητα 4 (ΠΡΩΗΝ 3): Προβλήματα -->
+        <!-- Ενότητα 4: Προβλήματα -->
         <section id="problems" class="content-section">
             <div class="section-heading">
                 <div><p class="section-kicker">03 / Στο πεδιο</p><h2>Κρίσιμα Γεωλογικά Προβλήματα</h2></div>
@@ -408,7 +411,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             );
         })}
 
-        <!-- Ενότητα 5 (ΠΡΩΗΝ 4): Μύθοι -->
+        <!-- Ενότητα 5: Μύθοι -->
         <section id="myths" class="content-section">
             <div class="section-heading">
                 <div><p class="section-kicker">04 / Η απομυθοποιηση</p><h2>Μύθοι και Αλήθειες</h2></div>
