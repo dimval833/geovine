@@ -248,8 +248,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 </head>
 <body>
     <header class="site-header">
-        <a href="#" style="margin-right: auto; display: flex; align-items: center;"><img src={`${import.meta.env.BASE_URL}LOGO_all.webp`} alt="Λογότυπο" style="height: 42px; width: auto;" /></a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Μενού</button>
+        <a href="#" style="margin-right: auto; display: flex; align-items: center; max-width: 70%; min-width: 0;"><img src={`${import.meta.env.BASE_URL}LOGO_all.webp`} alt="Λογότυπο" style="max-height: 42px; width: auto; max-width: 100%; object-fit: contain;" /></a>        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Μενού</button>
         <nav id="main-navigation" class="main-nav" aria-label="Κύρια sections">
             <a href="#terroir">Το Terroir</a>
             <a href="#rocks">Πετρώματα</a>
