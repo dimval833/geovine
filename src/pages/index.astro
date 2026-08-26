@@ -1,17 +1,20 @@
 ---
+// Υπολογίζουμε το σωστό URL με απόλυτη ασφάλεια
+const baseUrl = import.meta.env.BASE_URL;
+const targetUrl = baseUrl.endsWith('/') ? `${baseUrl}messinia` : `${baseUrl}/messinia`;
 ---
 <!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
     <title>GeoVine</title>
-    <!-- Αστραπιαία Ανακατεύθυνση χρησιμοποιώντας το Base URL -->
-    <meta http-equiv="refresh" content={`0;url=${import.meta.env.BASE_URL}messinia`} />
-    <script define:vars={{ baseUrl: import.meta.env.BASE_URL }}>
-        window.location.replace(`${baseUrl}messinia`);
+    <!-- Αστραπιαία Ανακατεύθυνση -->
+    <meta http-equiv="refresh" content={`0;url=${targetUrl}`} />
+    <script define:vars={{ targetUrl }}>
+        window.location.replace(targetUrl);
     </script>
 </head>
 <body>
-    <p>Γίνεται ανακατεύθυνση στον οδηγό Μεσσηνίας... <a href={`${import.meta.env.BASE_URL}messinia`}>Πατήστε εδώ αν καθυστερεί.</a></p>
+    <p>Γίνεται ανακατεύθυνση στον οδηγό Μεσσηνίας... <a href={targetUrl}>Πατήστε εδώ αν καθυστερεί.</a></p>
 </body>
 </html>
