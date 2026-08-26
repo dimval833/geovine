@@ -60,8 +60,8 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             align-items: center;
             justify-content: flex-end; 
             gap: 2rem;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.85); /* Πιο αισθητή διαφάνεια */
+            padding: 1rem 3rem; /* Εναρμονισμένο με το container */
+            background: rgba(255, 255, 255, 0.85);
             border-bottom: 1px solid rgba(107,35,58,0.08);
             backdrop-filter: blur(14px);
         }
@@ -69,7 +69,9 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .main-nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.35rem; }
         .main-nav a { color: var(--text); padding: 0.45rem 0.7rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700; text-decoration: none; transition: color 0.2s, background 0.2s; }
         .main-nav a:hover, .main-nav a:focus-visible { color: white; background: var(--primary); }
-        .container { box-sizing: border-box; width: 100%; max-width: 1200px; margin: 0 auto; padding: 3rem 2rem 0; }
+        
+        /* ΠΛΗΡΕΣ ΠΛΑΤΟΣ ΓΙΑ ΤΟ CONTAINER (Αντί για 1200px σταθερό) */
+        .container { box-sizing: border-box; width: 100%; max-width: 100%; margin: 0 auto; padding: 3rem 3rem 0; }
         
         .hero-section { padding: 7rem 0 3rem; text-align: center; max-width: 900px; margin: 0 auto; }
         .hero-section h1 { margin: 0.5rem 0 1rem; }
@@ -89,13 +91,14 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .section-heading > p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
         .content-section { scroll-margin-top: 6rem; margin-bottom: 7rem; }
 
-        /* ΑΚΡΙΒΕΣ SPLIT-SCREEN ΓΙΑ ΤΟ TERROIR (Μισή-μισή οθόνη) */
+        /* ΠΛΗΡΕΣ 50/50 SPLIT-SCREEN ΣΕ ΟΛΟ ΤΟ WIDTH */
         .terroir-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            align-items: start;
+            align-items: center;
             margin-bottom: 3rem;
+            width: 100%;
         }
         .map-card {
             position: relative;
@@ -105,6 +108,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             cursor: zoom-in;
             margin-top: 0; 
             transition: opacity 0.3s ease;
+            width: 100%;
         }
         .map-card:hover { opacity: 0.95; }
         .map-card img { width: 100%; display: block; object-fit: cover; }
@@ -240,7 +244,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 			.main-nav { display: none; width: 100%; flex-direction: column; align-items: stretch; gap: 0.15rem; padding-top: 0.35rem; max-height: calc(100vh - 70px); overflow-y: auto; padding-bottom: 1rem; }
 			.main-nav.is-open { display: flex; }
 			.main-nav a { padding: 0.65rem 0.85rem; border-radius: 7px; font-size: 0.85rem; text-align: right; }
-			.container { padding: 2rem 1rem 0; }
+			.container { padding: 2rem 1.5rem 0; }
 			.section-heading { display: block; }
 			.section-heading > p { margin-top: 0.7rem; }
 			.field-section { grid-template-columns: 1fr; gap: 1rem; }
@@ -285,16 +289,16 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             <p class="subtitle">Ένας πρακτικός οδηγός για το πώς το πέτρωμα επηρεάζει τη ρίζα, το νερό και τη συμπεριφορά του αμπελιού σας.</p>
         </section>
 
-        <!-- Ενότητα 2: Το Terroir & Ο Χάρτης (Ακριβές Split-Screen 50/50 με τίτλο στα δεξιά) -->
+        <!-- Ενότητα 2: Το Terroir & Ο Χάρτης (True Full-Width Split-Screen 50/50) -->
         <section id="terroir" class="content-section">
             <div class="terroir-layout">
-                <!-- Αριστερή στήλη: Ο Χάρτης σε πλήρες πλάτος -->
+                <!-- Αριστερή στήλη: Ο Χάρτης ακριβώς στη μισή οθόνη -->
                 <div class="map-card" onclick="openModal('map-modal')" aria-label="Άνοιγμα χάρτη σε πλήρη οθόνη">
                     <img src={`${import.meta.env.BASE_URL}map.webp`} alt="Γεωλογικός Χάρτης Τριφυλίας" loading="lazy" draggable="false" />
                     <div class="map-hint">🔍 Πατήστε για μεγέθυνση χάρτη</div>
                 </div>
                 
-                <!-- Δεξιά στήλη: Τίτλος και κείμενο μαζί -->
+                <!-- Δεξιά στήλη: Τίτλος και κείμενο ακριβώς στη δική τους μισή οθόνη -->
                 <div class="terroir-text">
                     <div style="margin-bottom: 1.5rem;">
                         <p class="section-kicker">01 / Το Επιστημονικο Υποβαθρο</p>
