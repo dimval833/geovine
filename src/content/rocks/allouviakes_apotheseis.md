@@ -1,6 +1,6 @@
 ---
 title: "Σύγχρονες Αλλουβιακές Αποθέσεις"
-image: "images/allouviakes.jpg"
+image: "images/allouviakes.webp"
 varieties: ["Grenache Rouge"]
 ---
 **Χαρακτηριστικά Εδάφους:** Ποτάμιες προσχώσεις σε πεδινά σημεία, που δημιουργούν εδάφη μεγάλου πάχους με πολύ υψηλή γονιμότητα.

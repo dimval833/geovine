@@ -1,6 +1,6 @@
 ---
 title: "Ασβεστόλιθος"
-image: "images/asvestolithos.jpg"
+image: "images/asvestolithos.webp"
 varieties: ["Chardonnay", "Cabernet Sauvignon"]
 ---
 **Χαρακτηριστικά Εδάφους:** Σκληρά εδάφη με καλή δομή που περιέχουν υψηλό ποσοστό ασβεστίου και ανθρακικών αλάτων. Διαθέτουν αλκαλικό pH και εξασφαλίζουν καλή ισορροπία αποστράγγισης.
