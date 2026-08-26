@@ -150,7 +150,6 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .modal-image { display: block; width: calc(100% + 5rem); height: 220px; margin: -2.5rem -2.5rem 2rem; object-fit: cover; }
         .modal-backdrop.active .modal-content { transform: translateY(0) scale(1); }
         
-        /* ΝΕΑ ΚΛΑΣΗ ΓΙΑ ΤΟ ΥΠΟΜΝΗΜΑ - Πιο σφιχτά περιθώρια */
         .mapping-legend { display: block; max-width: 50%; height: auto; margin: 0.25rem 0 1.25rem; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 
         .map-zoom-wrapper { position: relative; width: 100%; height: 65vh; border-radius: 12px; overflow: hidden; background: #e9e5de; box-shadow: inset 0 0 10px rgba(0,0,0,0.1); }
@@ -252,10 +251,10 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         <a href="#" style="margin-right: auto; display: flex; align-items: center;"><img src={`${import.meta.env.BASE_URL}paleo.png`} alt="Λογότυπο" style="height: 42px; width: auto;" /></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Μενού</button>
         <nav id="main-navigation" class="main-nav" aria-label="Κύρια sections">
+            <a href="#terroir">Το Terroir</a>
             <a href="#rocks">Πετρώματα</a>
             <a href="#problems">Προβλήματα</a>
             <a href="#myths">Μύθοι</a>
-            <a href="#terroir">Το Terroir</a>
             <a href="#sources">Πηγές</a>
             <a href="#field-notes">Η Εμπειρία Σας</a>
             <a href="#about">Σχετικά</a>
@@ -271,134 +270,10 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             <p class="subtitle">Ένας πρακτικός οδηγός για το πώς το πέτρωμα επηρεάζει τη ρίζα, το νερό και τη συμπεριφορά του αμπελιού σας.</p>
         </section>
 
-        <!-- Ενότητα 2: Τα Πετρώματα -->
-        <section id="rocks" class="content-section">
-            <div class="section-heading">
-                <div><p class="section-kicker">01 / Ο πρακτικος οδηγος</p><h2>Πετρώματα της Μεσσηνίας</h2></div>
-                <p>Οκτώ γεωλογικοί σχηματισμοί και προτεινόμενες ποικιλίες.</p>
-            </div>
-        
-            <div class="bento-grid">
-                {rocks.map((rock: any, index: number) => {
-                    const rockId = `rock-${index}`;
-                    return (
-                        <div class="bento-card" onclick={`openModal('${rockId}')`}>
-                            <img src={`${import.meta.env.BASE_URL}${rock.frontmatter.image.replace(/^\//, '')}`} alt={rock.frontmatter.title} loading="lazy" />
-                            <h3 class="bento-card-title">{rock.frontmatter.title}</h3>
-                        </div>
-                    );
-                })}
-            </div>
-        </section>
-
-        {rocks.map((rock: any, index: number) => {
-            const rockId = `rock-${index}`;
-            return (
-                <div id={rockId} class="modal-backdrop" onclick={`closeModal('${rockId}')`}>
-                    <div class="modal-content" onclick="event.stopPropagation()">
-                        <button class="close-btn" onclick={`closeModal('${rockId}')`}>✕</button>
-                        <img class="modal-image" src={`${import.meta.env.BASE_URL}${rock.frontmatter.image.replace(/^\//, '')}`} alt={rock.frontmatter.title} />
-                        
-                        <h2 style="margin-top: 0; margin-bottom: 0.25rem;">{rock.frontmatter.title}</h2>
-                        
-                        <!-- Η εικόνα του υπομνήματος μεταφέρθηκε ΑΚΡΙΒΩΣ κάτω από τον τίτλο -->
-                        <img 
-                            class="mapping-legend" 
-                            src={`${import.meta.env.BASE_URL}mappings/${rock.frontmatter.image.replace(/^\//, '')}`} 
-                            alt={`Υπόμνημα χάρτη - ${rock.frontmatter.title}`} 
-                            loading="lazy" 
-                        />
-
-                        <!-- Οι ποικιλίες (tags) πήγαν αμέσως μετά για να μη διακόπτουν την οπτική ροή -->
-                        <div class="tags" style="margin-top: 0; margin-bottom: 1.5rem;">
-                            {rock.frontmatter.varieties?.map((v: string) => (
-                                <span class="tag">{v}</span>
-                            ))}
-                        </div>
-                        
-                        <Fragment set:html={rock.compiledContent()} />
-                    </div>
-                </div>
-            );
-        })}
-
-        <!-- Ενότητα 3: Προβλήματα -->
-        <section id="problems" class="content-section">
-            <div class="section-heading">
-                <div><p class="section-kicker">02 / Στο πεδιο</p><h2>Κρίσιμα Γεωλογικά Προβλήματα</h2></div>
-                <p>Οι συνθήκες που δοκιμάζουν τη ρίζα, το έδαφος και τη διαχείριση του αμπελώνα.</p>
-            </div>
-            <div class="text-grid">
-                {problems.map((problem: any, index: number) => {
-                    const problemId = `problem-${index}`;
-                    return (
-                        <article class="text-card" onclick={`openModal('${problemId}')`}>
-                            <img src={`${import.meta.env.BASE_URL}${problem.frontmatter.image.replace(/^\//, '')}`} alt={problem.frontmatter.title} loading="lazy" />
-                            <div class="text-card-copy">
-                                <h3>{problem.frontmatter.title}</h3>
-                            </div>
-                        </article>
-                    );
-                })}
-            </div>
-        </section>
-
-        {problems.map((problem: any, index: number) => {
-            const problemId = `problem-${index}`;
-            return (
-                <div id={problemId} class="modal-backdrop" onclick={`closeModal('${problemId}')`}>
-                    <div class="modal-content" onclick="event.stopPropagation()">
-                        <button class="close-btn" onclick={`closeModal('${problemId}')`}>✕</button>
-                        <img class="modal-image" src={`${import.meta.env.BASE_URL}${problem.frontmatter.image.replace(/^\//, '')}`} alt={problem.frontmatter.title} />
-                        <h2 style="margin-top: 0;">{problem.frontmatter.title}</h2>
-                        <Fragment set:html={problem.compiledContent()} />
-                    </div>
-                </div>
-            );
-        })}
-
-        <!-- Ενότητα 4: Μύθοι -->
-        <section id="myths" class="content-section">
-            <div class="section-heading">
-                <div><p class="section-kicker">03 / Η απομυθοποιηση</p><h2>Μύθοι και Αλήθειες</h2></div>
-                <p>Τι δεν μεταφέρει ο βράχος στο ποτήρι και τι πραγματικά ρυθμίζει.</p>
-            </div>
-            <div class="text-grid">
-                {myths.map((myth: any, index: number) => {
-                    const mythId = `myth-${index}`;
-                    return (
-                        <article class="text-card" onclick={`openModal('${mythId}')`}>
-                            <img src={`${import.meta.env.BASE_URL}${myth.frontmatter.image.replace(/^\//, '')}`} alt="Μύθος" loading="lazy" />
-                            <div class="text-card-copy">
-                                <h3>{myth.frontmatter.title}</h3>
-                            </div>
-                        </article>
-                    );
-                })}
-            </div>
-        </section>
-
-        {myths.map((myth: any, index: number) => {
-            const mythId = `myth-${index}`;
-            return (
-                <div id={mythId} class="modal-backdrop" onclick={`closeModal('${mythId}')`}>
-                    <div class="modal-content" onclick="event.stopPropagation()">
-                        <button class="close-btn" onclick={`closeModal('${mythId}')`}>✕</button>
-                        <img class="modal-image" src={`${import.meta.env.BASE_URL}${myth.frontmatter.image.replace(/^\//, '')}`} alt="Μύθος" />
-                        <h2 style="margin-top: 0;">{myth.frontmatter.title}</h2>
-                        <p style="font-size: 1.15rem; font-style: italic; color: var(--primary); font-weight: 600; border-left: 3px solid var(--accent); padding-left: 1rem; margin-bottom: 1.5rem;">
-                            <strong>Ο Μύθος:</strong> «{myth.frontmatter.quote}»
-                        </p>
-                        <Fragment set:html={myth.compiledContent()} />
-                    </div>
-                </div>
-            );
-        })}
-
-        <!-- Ενότητα 5: Το Terroir & Ο Χάρτης -->
+        <!-- Ενότητα 2 (ΠΡΩΗΝ 5): Το Terroir & Ο Χάρτης -->
         <section id="terroir" class="content-section">
             <div class="section-heading" style="margin-bottom: 2.5rem;">
-                <div><p class="section-kicker">04 / Το Επιστημονικο Υποβαθρο</p><h2>{intro.frontmatter.title}</h2></div>
+                <div><p class="section-kicker">01 / Το Επιστημονικο Υποβαθρο</p><h2>{intro.frontmatter.title}</h2></div>
             </div>
             
             <div class="terroir-layout">
@@ -434,6 +309,128 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
                 </div>
             </div>
         </div>
+
+        <!-- Ενότητα 3 (ΠΡΩΗΝ 2): Τα Πετρώματα -->
+        <section id="rocks" class="content-section">
+            <div class="section-heading">
+                <div><p class="section-kicker">02 / Ο πρακτικος οδηγος</p><h2>Πετρώματα της Μεσσηνίας</h2></div>
+                <p>Οκτώ γεωλογικοί σχηματισμοί και προτεινόμενες ποικιλίες.</p>
+            </div>
+        
+            <div class="bento-grid">
+                {rocks.map((rock: any, index: number) => {
+                    const rockId = `rock-${index}`;
+                    return (
+                        <div class="bento-card" onclick={`openModal('${rockId}')`}>
+                            <img src={`${import.meta.env.BASE_URL}${rock.frontmatter.image.replace(/^\//, '')}`} alt={rock.frontmatter.title} loading="lazy" />
+                            <h3 class="bento-card-title">{rock.frontmatter.title}</h3>
+                        </div>
+                    );
+                })}
+            </div>
+        </section>
+
+        {rocks.map((rock: any, index: number) => {
+            const rockId = `rock-${index}`;
+            return (
+                <div id={rockId} class="modal-backdrop" onclick={`closeModal('${rockId}')`}>
+                    <div class="modal-content" onclick="event.stopPropagation()">
+                        <button class="close-btn" onclick={`closeModal('${rockId}')`}>✕</button>
+                        <img class="modal-image" src={`${import.meta.env.BASE_URL}${rock.frontmatter.image.replace(/^\//, '')}`} alt={rock.frontmatter.title} />
+                        
+                        <h2 style="margin-top: 0; margin-bottom: 0.25rem;">{rock.frontmatter.title}</h2>
+                        
+                        <img 
+                            class="mapping-legend" 
+                            src={`${import.meta.env.BASE_URL}mappings/${rock.frontmatter.image.replace(/^\//, '')}`} 
+                            alt={`Υπόμνημα χάρτη - ${rock.frontmatter.title}`} 
+                            loading="lazy" 
+                        />
+
+                        <div class="tags" style="margin-top: 0; margin-bottom: 1.5rem;">
+                            {rock.frontmatter.varieties?.map((v: string) => (
+                                <span class="tag">{v}</span>
+                            ))}
+                        </div>
+                        
+                        <Fragment set:html={rock.compiledContent()} />
+                    </div>
+                </div>
+            );
+        })}
+
+        <!-- Ενότητα 4 (ΠΡΩΗΝ 3): Προβλήματα -->
+        <section id="problems" class="content-section">
+            <div class="section-heading">
+                <div><p class="section-kicker">03 / Στο πεδιο</p><h2>Κρίσιμα Γεωλογικά Προβλήματα</h2></div>
+                <p>Οι συνθήκες που δοκιμάζουν τη ρίζα, το έδαφος και τη διαχείριση του αμπελώνα.</p>
+            </div>
+            <div class="text-grid">
+                {problems.map((problem: any, index: number) => {
+                    const problemId = `problem-${index}`;
+                    return (
+                        <article class="text-card" onclick={`openModal('${problemId}')`}>
+                            <img src={`${import.meta.env.BASE_URL}${problem.frontmatter.image.replace(/^\//, '')}`} alt={problem.frontmatter.title} loading="lazy" />
+                            <div class="text-card-copy">
+                                <h3>{problem.frontmatter.title}</h3>
+                            </div>
+                        </article>
+                    );
+                })}
+            </div>
+        </section>
+
+        {problems.map((problem: any, index: number) => {
+            const problemId = `problem-${index}`;
+            return (
+                <div id={problemId} class="modal-backdrop" onclick={`closeModal('${problemId}')`}>
+                    <div class="modal-content" onclick="event.stopPropagation()">
+                        <button class="close-btn" onclick={`closeModal('${problemId}')`}>✕</button>
+                        <img class="modal-image" src={`${import.meta.env.BASE_URL}${problem.frontmatter.image.replace(/^\//, '')}`} alt={problem.frontmatter.title} />
+                        <h2 style="margin-top: 0;">{problem.frontmatter.title}</h2>
+                        <Fragment set:html={problem.compiledContent()} />
+                    </div>
+                </div>
+            );
+        })}
+
+        <!-- Ενότητα 5 (ΠΡΩΗΝ 4): Μύθοι -->
+        <section id="myths" class="content-section">
+            <div class="section-heading">
+                <div><p class="section-kicker">04 / Η απομυθοποιηση</p><h2>Μύθοι και Αλήθειες</h2></div>
+                <p>Τι δεν μεταφέρει ο βράχος στο ποτήρι και τι πραγματικά ρυθμίζει.</p>
+            </div>
+            <div class="text-grid">
+                {myths.map((myth: any, index: number) => {
+                    const mythId = `myth-${index}`;
+                    return (
+                        <article class="text-card" onclick={`openModal('${mythId}')`}>
+                            <img src={`${import.meta.env.BASE_URL}${myth.frontmatter.image.replace(/^\//, '')}`} alt="Μύθος" loading="lazy" />
+                            <div class="text-card-copy">
+                                <h3>{myth.frontmatter.title}</h3>
+                            </div>
+                        </article>
+                    );
+                })}
+            </div>
+        </section>
+
+        {myths.map((myth: any, index: number) => {
+            const mythId = `myth-${index}`;
+            return (
+                <div id={mythId} class="modal-backdrop" onclick={`closeModal('${mythId}')`}>
+                    <div class="modal-content" onclick="event.stopPropagation()">
+                        <button class="close-btn" onclick={`closeModal('${mythId}')`}>✕</button>
+                        <img class="modal-image" src={`${import.meta.env.BASE_URL}${myth.frontmatter.image.replace(/^\//, '')}`} alt="Μύθος" />
+                        <h2 style="margin-top: 0;">{myth.frontmatter.title}</h2>
+                        <p style="font-size: 1.15rem; font-style: italic; color: var(--primary); font-weight: 600; border-left: 3px solid var(--accent); padding-left: 1rem; margin-bottom: 1.5rem;">
+                            <strong>Ο Μύθος:</strong> «{myth.frontmatter.quote}»
+                        </p>
+                        <Fragment set:html={myth.compiledContent()} />
+                    </div>
+                </div>
+            );
+        })}
 
         <!-- Ενότητα 6: Πηγές (Βιβλιογραφία & Οπτικό Υλικό) -->
         <section id="sources" class="content-section" style="border-top: 1px solid rgba(107,35,58,0.18); padding-top: 4rem;">
