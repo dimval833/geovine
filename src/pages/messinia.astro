@@ -46,7 +46,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             padding: 0;
         }
         h1, h2, h3 { font-family: 'Manrope', sans-serif; color: var(--primary); }
-        h1 { font-size: clamp(2.35rem, 4.5vw, 4.2rem); line-height: 1.02; letter-spacing: -0.03em; }
+        h1 { font-size: clamp(2.35rem, 4.2vw, 4rem); line-height: 1.05; letter-spacing: -0.03em; }
         h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.1; }
         
        .site-header {
@@ -61,8 +61,8 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             justify-content: flex-end; 
             gap: 2rem;
             padding: 1rem 3rem;
-            background: rgba(255, 255, 255, 0.85);
-            border-bottom: 1px solid rgba(107,35,58,0.08);
+            background: rgba(255, 255, 255, 0.82); /* Ιδανική ισορροπία αισθητού / ανεπαισθητου */
+            border-bottom: 1px solid rgba(107,35,58,0.06);
             backdrop-filter: blur(14px);
         }
         .menu-toggle { display: none; border: 1px solid rgba(107,35,58,0.2); border-radius: 8px; padding: 0.45rem 0.7rem; background: transparent; color: var(--primary); font: inherit; font-size: 0.8rem; font-weight: 800; }
@@ -70,10 +70,8 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .main-nav a { color: var(--text); padding: 0.45rem 0.7rem; border-radius: 999px; font-size: 0.8rem; font-weight: 700; text-decoration: none; transition: color 0.2s, background 0.2s; }
         .main-nav a:hover, .main-nav a:focus-visible { color: white; background: var(--primary); }
         
-        /* Container μηδενικού padding για πλήρη αξιοποίηση πλάτους */
-        .container { box-sizing: border-box; width: 100%; max-width: 100%; margin: 0 auto; padding: 3rem 0 0 0; }
+        .container { box-sizing: border-box; width: 100%; max-width: 100%; margin: 0 auto; padding: 0; }
         
-        /* Προστατευτικό wrapper για τα υπόλοιπα sections ώστε να έχουν περιθώρια */
         .padded-content {
             padding-left: 3rem;
             padding-right: 3rem;
@@ -93,39 +91,40 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .section-heading > p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
         .content-section { scroll-margin-top: 6rem; margin-bottom: 7rem; }
 
-        /* ΠΛΗΡΕΣ 50/50 SPLIT-SCREEN ΜΕ ΑΡΙΣΤΕΡΟ BLEED ΓΙΑ ΤΟΝ ΧΑΡΤΗ */
+        /* FULL BLEED SPLIT-SCREEN ΧΩΡΙΣ ΠΕΡΙΘΩΡΙΟ ΠΑΝΩ */
         .terroir-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            align-items: center;
-            margin-bottom: 3rem;
+            align-items: stretch;
+            margin-bottom: 7rem;
             width: 100%;
         }
         .map-card-bleed {
             position: relative;
-            border-top-right-radius: 12px;
-            border-bottom-right-radius: 12px;
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 16px;
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
             overflow: hidden;
-            border-top: 1px solid rgba(107,35,58,0.12);
-            border-bottom: 1px solid rgba(107,35,58,0.12);
-            border-right: 1px solid rgba(107,35,58,0.12);
-            border-left: none;
             cursor: zoom-in;
-            transition: opacity 0.3s ease;
-            width: 100%;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: #e9e5de;
         }
-        .map-card-bleed:hover { opacity: 0.95; }
-        .map-card-bleed img { width: 100%; display: block; object-fit: cover; }
-        .map-hint { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); color: white; padding: 1.5rem 1rem 1rem; text-align: center; font-size: 0.85rem; font-weight: 600; pointer-events: none;}
+        .map-card-bleed img { width: 100%; height: 100%; display: block; object-fit: cover; }
+        .map-hint { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); color: white; padding: 2rem 1rem 1.5rem; text-align: center; font-size: 0.85rem; font-weight: 600; pointer-events: none;}
         
         .terroir-text-wrapper {
+            padding-top: 9rem; /* Ξεκινάει κάτω από τη fixed μπάρα */
             padding-right: 3rem;
             font-size: 1.05rem;
             color: var(--text);
             text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .terroir-text-wrapper h1 { margin: 0.5rem 0 1rem; }
         .subtitle-inline {
@@ -134,7 +133,26 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             margin: 0;
             line-height: 1.5;
         }
-        .terroir-text-wrapper > *:first-child { margin-top: 0 !important; }
+
+        /* Κουμπί περισσοτέρων για το popup γεωλογίας */
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 999px;
+            padding: 0.75rem 1.5rem;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 12px rgba(107,35,58,0.2);
+        }
+        .read-more-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .read-more-btn:active { transform: scale(0.98); }
 
         .gallery-section { padding: 3rem 0; overflow: hidden; }
         .gallery-track { 
@@ -249,9 +267,9 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 
         @media (max-width: 900px) {
             .bento-grid, .text-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .terroir-layout { grid-template-columns: 1fr; gap: 2rem; padding: 0 1rem; }
-            .map-card-bleed { border-radius: 12px; border: 1px solid rgba(107,35,58,0.12); } 
-            .terroir-text-wrapper { padding-right: 0; }
+            .terroir-layout { grid-template-columns: 1fr; gap: 2rem; }
+            .map-card-bleed { min-height: 50vh; border-radius: 12px; } 
+            .terroir-text-wrapper { padding-top: 6rem; padding-left: 1rem; padding-right: 1rem; }
             .padded-content { padding-left: 1rem; padding-right: 1rem; }
             
             .partner-banner { gap: 1rem; justify-content: space-around;}
@@ -259,12 +277,11 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         }
 
 		@media (max-width: 600px) {
-			.site-header { position: fixed; inset: 0 0 auto; top: 0; z-index: 50; box-sizing: border-box; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65rem; padding: 0.85rem 1rem; background: rgba(255, 255, 255, 0.85); }
+			.site-header { position: fixed; inset: 0 0 auto; top: 0; z-index: 50; box-sizing: border-box; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65rem; padding: 0.85rem 1rem; background: rgba(255, 255, 255, 0.82); }
 			.menu-toggle { display: block; position: static; }
 			.main-nav { display: none; width: 100%; flex-direction: column; align-items: stretch; gap: 0.15rem; padding-top: 0.35rem; max-height: calc(100vh - 70px); overflow-y: auto; padding-bottom: 1rem; }
 			.main-nav.is-open { display: flex; }
 			.main-nav a { padding: 0.65rem 0.85rem; border-radius: 7px; font-size: 0.85rem; text-align: right; }
-			.container { padding-top: 2rem; }
             .padded-content { padding-left: 1rem; padding-right: 1rem; }
 			.section-heading { display: block; }
 			.section-heading > p { margin-top: 0.7rem; }
@@ -303,31 +320,47 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 
     <main class="container">
         
-        <!-- Ενότητα: Το Terroir & Ο Χάρτης (Full Bleed αριστερά, Hero τίτλοι και κείμενο δεξιά) -->
-        <section id="terroir" class="content-section" style="margin-top: 6rem;">
+        <!-- Ενότητα: Hero & Terroir Split-Screen (Full Bleed αριστερά κάτω από τη μπάρα) -->
+        <section id="terroir" class="content-section" style="margin-bottom: 7rem;">
             <div class="terroir-layout">
-                <!-- Αριστερή στήλη: Ο Χάρτης ακριβώς κολλημένος στην αριστερή άκρη της οθόνης -->
+                <!-- Αριστερή στήλη: Ο Χάρτης κολλημένος πανω-αριστερά -->
                 <div class="map-card-bleed" onclick="openModal('map-modal')" aria-label="Άνοιγμα χάρτη σε πλήρη οθόνη">
                     <img src={`${import.meta.env.BASE_URL}map.webp`} alt="Γεωλογικός Χάρτης Τριφυλίας" loading="lazy" draggable="false" />
                     <div class="map-hint">🔍 Πατήστε για μεγέθυνση χάρτη</div>
                 </div>
                 
-                <!-- Δεξιά στήλη: Hero τίτλοι και κείμενο αριστερόστοιχισμένα -->
+                <!-- Δεξιά στήλη: Τίτλοι, υποτίτλοι και κουμπί για το popup -->
                 <div class="terroir-text-wrapper">
                     <p class="eyebrow">Γεωλογία • Αμπελουργία • Μεσσηνία</p>
                     <h1>GeoVine Messinia Terroirs</h1>
                     <p class="subtitle-inline">Ένας πρακτικός οδηγός για το πώς το πέτρωμα επηρεάζει τη ρίζα, το νερό και τη συμπεριφορά του αμπελιού σας.</p>
                     
-                    <div style="margin-top: 2.5rem; margin-bottom: 1.5rem;">
+                    <div style="margin-top: 3rem; margin-bottom: 0.5rem;">
                         <p class="section-kicker">01 / Το Επιστημονικο Υποβαθρο</p>
                         <h2 style="margin: 0;">{intro.frontmatter.title}</h2>
                     </div>
-                    <div class="terroir-content-body">
-                        <Fragment set:html={intro.compiledContent()} />
+                    <p style="color: #666; font-size: 0.95rem; margin-top: 0.5rem;">
+                        Μάθετε πώς το μητρικό πέτρωμα διαμορφώνει το φυσικό περιβάλλον της ρίζας και ρυθμίζει τις κρίσιμες λειτουργίες του αμπελιού στη Μεσσηνία.
+                    </p>
+                    <div>
+                        <button class="read-more-btn" onclick="openModal('intro-modal')">
+                            Διαβάστε περισσότερα →
+                        </button>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Modal Popup για το κείμενο της γεωλογίας (Intro) -->
+        <div id="intro-modal" class="modal-backdrop" onclick="closeModal('intro-modal')">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <button class="close-btn" onclick="closeModal('intro-modal')">✕</button>
+                <h2 style="margin-top: 0; color: var(--primary);">{intro.frontmatter.title}</h2>
+                <div style="margin-top: 1.5rem; color: var(--text);">
+                    <Fragment set:html={intro.compiledContent()} />
+                </div>
+            </div>
+        </div>
 
         <!-- Τα υπόλοιπα sections κλεισμένα στο padded-content για να έχουν τα περιθώριά τους -->
         <div class="padded-content">
