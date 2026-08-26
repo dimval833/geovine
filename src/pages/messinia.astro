@@ -214,18 +214,10 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .site-footer { display: flex; justify-content: flex-end; padding: 2rem 0 3rem; border-top: 1px solid rgba(107,35,58,0.18); color: #716d65; font-size: 0.82rem; }
         .site-footer a { color: var(--primary); font-weight: 800; text-decoration: none;}
 
-        /* Κλάσεις για το Header Logo (Βασικός κανόνας για PC) */
+        /* Κλάσεις για το Header Logo */
         .brand-link { margin-right: auto; display: flex; align-items: center; }
         .brand-logo { height: 42px; width: auto; max-width: 100%; object-fit: contain; }
 
-        /* Κανόνας ΜΟΝΟ για το Λογότυπο: Tablets & Κινητά με υψηλή ανάλυση */
-        @media (max-width: 1200px) and (-webkit-min-device-pixel-ratio: 2), 
-               (max-width: 1200px) and (min-resolution: 2dppx) {
-            .brand-link { max-width: 70%; }
-            .brand-logo { height: 24px; }
-        }
-
-        /* --- ΑΝΕΠΑΦΟ ΤΟ ΥΠΟΛΟΙΠΟ ΣΤΗΣΙΜΟ ΤΟΥ SITE ΣΟΥ --- */
         @media (max-width: 900px) {
             .bento-grid, .text-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .hero-section { padding: 6rem 1rem 2rem; }
@@ -255,6 +247,10 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 			.modal-backdrop { align-items: center; justify-content: center; padding: 1rem; box-sizing: border-box; }
 			.modal-content { width: 100%; box-sizing: border-box; max-height: 90vh; max-height: 90dvh; border-radius: 18px; transform: translateY(24px) scale(0.96); padding: 1.5rem 1rem; }
 			.modal-image { width: calc(100% + 2rem); height: 180px; margin: -1.5rem -1rem 1.5rem; }
+            
+            /* Εδώ μικραίνουν δραστικά τα λογότυπα μόνο στο κινητό */
+            .brand-link { max-width: 70%; }
+            .brand-logo { height: 22px; } 
 		}
     </style>
 </head>
