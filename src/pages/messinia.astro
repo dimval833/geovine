@@ -91,7 +91,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .section-heading > p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
         .content-section { scroll-margin-top: 6rem; margin-bottom: 7rem; }
 
-        /* ΜΟΝΤΕΡΝΟ SPLIT-SCREEN & CROP ΤΟΥ ΧΑΡΤΗ ΠΡΟΣ ΤΑ ΠΑΝΩ */
+        /* FULL BLEED SPLIT-SCREEN - ΧΩΡΙΣ ΚΑΜΠΥΛΕΣ ΣΤΙΣ ΑΚΡΕΣ */
         .terroir-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -102,8 +102,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         }
         .map-card-bleed {
             position: relative;
-            border-top-right-radius: 16px;
-            border-bottom-right-radius: 16px;
+            border-radius: 0; /* Χωρίς καμπύλες στις άκρες */
             overflow: hidden;
             cursor: zoom-in;
             min-height: 92vh;
@@ -122,7 +121,6 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         }
         .map-hint { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); color: white; padding: 2rem 1rem 1.5rem; text-align: center; font-size: 0.85rem; font-weight: 600; pointer-events: none;}
         
-        /* ΔΕΞΙΟ ΣΤΗΣΙΜΟ ΜΕ ΖΩΝΤΑΝΙΑ ΚΑΙ ANIMATION */
         .terroir-text-wrapper {
             padding-top: 8rem; 
             padding-right: 4rem;
@@ -157,7 +155,6 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             padding-left: 1.2rem;
         }
 
-        /* Κουμπί περισσοτέρων με κομψό εφέ */
         .read-more-btn {
             display: inline-flex;
             align-items: center;
@@ -294,19 +291,20 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             .brand-logo { height: 24px; }
         }
 
+        /* Τα tablets διατηρούν δομή PC (δύο στήλες), μόνο τα κινητά (<600px) στοιβάζονται κάθετα */
         @media (max-width: 900px) {
             .bento-grid, .text-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .terroir-layout { grid-template-columns: 1fr; gap: 2rem; }
-            .map-card-bleed { min-height: 50vh; border-radius: 12px; } 
-            .map-card-bleed img { margin-top: 0; height: 100%; object-position: center; }
-            .terroir-text-wrapper { padding-top: 6rem; padding-left: 1rem; padding-right: 1rem; }
             .padded-content { padding-left: 1rem; padding-right: 1rem; }
-            
             .partner-banner { gap: 1rem; justify-content: space-around;}
             .partner-logo img { height: 40px; }
         }
 
-		@media (max-width: 600px) {
+        @media (max-width: 600px) {
+            .terroir-layout { grid-template-columns: 1fr; gap: 2rem; }
+            .map-card-bleed { min-height: 300px; max-height: 320px; border-radius: 0; } 
+            .map-card-bleed img { margin-top: 0; height: 100%; object-position: center; }
+            .terroir-text-wrapper { padding-top: 3rem; padding-left: 1rem; padding-right: 1rem; }
+            
 			.site-header { position: fixed; inset: 0 0 auto; top: 0; z-index: 50; box-sizing: border-box; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65rem; padding: 0.85rem 1rem; background: rgba(255, 255, 255, 0.85); }
 			.menu-toggle { display: block; position: static; }
 			.main-nav { display: none; width: 100%; flex-direction: column; align-items: stretch; gap: 0.15rem; padding-top: 0.35rem; max-height: calc(100vh - 70px); overflow-y: auto; padding-bottom: 1rem; }
@@ -338,7 +336,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         </a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-navigation">Μενού</button>
         <nav id="main-navigation" class="main-nav" aria-label="Κύρια sections">
-            <a href="#terroir">Terroir</a>
+            <a href="#terroir">Το Terroir</a>
             <a href="#rocks">Πετρώματα</a>
             <a href="#problems">Προβλήματα</a>
             <a href="#myths">Μύθοι</a>
@@ -353,19 +351,19 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         <!-- Ενότητα: Hero & Terroir Split-Screen -->
         <section id="terroir" class="content-section" style="margin-bottom: 7rem;">
             <div class="terroir-layout">
-                <!-- Αριστερή στήλη: Ο Χάρτης με κομμένο το επάνω μέρος (εκτός οθόνης) -->
+                <!-- Αριστερή στήλη: Ο Χάρτης κολλημένος πανω-αριστερά χωρίς καμπύλες -->
                 <div class="map-card-bleed" onclick="openModal('map-modal')" aria-label="Άνοιγμα χάρτη σε πλήρη οθόνη">
                     <img src={`${import.meta.env.BASE_URL}map.webp`} alt="Γεωλογικός Χάρτης Τριφυλίας" loading="lazy" draggable="false" />
                     <div class="map-hint">🔍 Πατήστε για μεγέθυνση χάρτη</div>
                 </div>
                 
-                <!-- Δεξιά στήλη: Αναβαθμισμένοι, ζωντανοί τίτλοι και υπότιτλοι -->
+                <!-- Δεξιά στήλη: Αναβαθμισμένοι, ζωντανοί τίτλοι και μεγαλύτερο διάκενο -->
                 <div class="terroir-text-wrapper">
                     <p class="eyebrow">Γεωλογία • Αμπελουργία • Μεσσηνία</p>
                     <h1>GeoVine Messinia Terroirs</h1>
                     <p class="subtitle-inline">Ένας πρακτικός οδηγός για το πώς το πέτρωμα επηρεάζει τη ρίζα, το νερό και τη συμπεριφορά του αμπελιού σας.</p>
                     
-                    <div style="margin-top: 2rem; margin-bottom: 0.5rem;">
+                    <div style="margin-top: 3.5rem; margin-bottom: 0.5rem;">
                         <p class="section-kicker">01 / Το Επιστημονικο Υποβαθρο</p>
                         <h2 style="margin: 0; font-size: clamp(1.6rem, 2.5vw, 2.2rem);">{intro.frontmatter.title}</h2>
                     </div>
