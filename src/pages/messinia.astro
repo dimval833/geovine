@@ -30,7 +30,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             --primary-dark: #401c2b;
             --accent: #b77b45;
             --sage: #75856b;
-            --bg: #f4f0e8;
+            --bg: #ffffff; /* Καθαρό, σύγχρονο λευκό φόντο */
             --text: #30302d;
             --card-bg: #ffffff;
         }
@@ -40,8 +40,6 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             overflow-x: hidden;
             font-family: 'Manrope', sans-serif;
             background: var(--bg);
-            background-image: linear-gradient(rgba(107,35,58,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(107,35,58,0.035) 1px, transparent 1px);
-            background-size: 32px 32px;
             color: var(--text);
             line-height: 1.6;
             margin: 0;
@@ -62,8 +60,8 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             justify-content: flex-end; 
             gap: 2rem;
             padding: 1rem 2rem;
-            background: rgba(244,240,232,0.95);
-            border-bottom: 1px solid rgba(107,35,58,0.12);
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid rgba(107,35,58,0.08);
             backdrop-filter: blur(14px);
         }
         .menu-toggle { display: none; border: 1px solid rgba(107,35,58,0.2); border-radius: 8px; padding: 0.45rem 0.7rem; background: transparent; color: var(--primary); font: inherit; font-size: 0.8rem; font-weight: 800; }
@@ -90,25 +88,26 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .section-heading > p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
         .content-section { scroll-margin-top: 6rem; margin-bottom: 7rem; }
 
+        /* ΜΟΝΤΕΡΝΟ SPLIT-SCREEN ΓΙΑ ΤΟ TERROIR (Μισή-μισή οθόνη χωρίς περιθώρια) */
         .terroir-layout {
             display: grid;
-            grid-template-columns: 0.8fr 1.2fr;
-            gap: 3rem;
-            align-items: start;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
             margin-bottom: 3rem;
         }
         .map-card {
             position: relative;
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(107,35,58,0.12); /* Λεπτό, καθαρό περίγραμμα αντί για βαριά σκιά */
             cursor: zoom-in;
-            margin-top: 6px; 
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 0; 
+            transition: opacity 0.3s ease;
         }
-        .map-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+        .map-card:hover { opacity: 0.95; }
         .map-card img { width: 100%; display: block; object-fit: cover; }
-        .map-hint { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); color: white; padding: 1.5rem 1rem 1rem; text-align: center; font-size: 0.85rem; font-weight: 600; pointer-events: none;}
+        .map-hint { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); color: white; padding: 1.5rem 1rem 1rem; text-align: center; font-size: 0.85rem; font-weight: 600; pointer-events: none;}
         
         .terroir-text { font-size: 1.05rem; color: var(--text); }
         .terroir-text > *:first-child { margin-top: 0 !important; }
@@ -219,7 +218,6 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .brand-link { margin-right: auto; display: flex; align-items: center; }
         .brand-logo { height: 42px; width: auto; max-width: 100%; object-fit: contain; }
 
-        /* Οτιδήποτε κάτω από 1200px (Κινητά & Tablets) γίνεται αυστηρά 24px */
         @media (max-width: 1200px) {
             .brand-link { max-width: 70%; }
             .brand-logo { height: 24px; }
@@ -236,7 +234,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         }
 
 		@media (max-width: 600px) {
-			.site-header { position: fixed; inset: 0 0 auto; top: 0; z-index: 50; box-sizing: border-box; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65rem; padding: 0.85rem 1rem; background: rgba(244,240,232,0.95); }
+			.site-header { position: fixed; inset: 0 0 auto; top: 0; z-index: 50; box-sizing: border-box; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65rem; padding: 0.85rem 1rem; background: rgba(255, 255, 255, 0.95); }
 			.menu-toggle { display: block; position: static; }
 			.main-nav { display: none; width: 100%; flex-direction: column; align-items: stretch; gap: 0.15rem; padding-top: 0.35rem; max-height: calc(100vh - 70px); overflow-y: auto; padding-bottom: 1rem; }
 			.main-nav.is-open { display: flex; }
@@ -255,7 +253,6 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 			.modal-content { width: 100%; box-sizing: border-box; max-height: 90vh; max-height: 90dvh; border-radius: 18px; transform: translateY(24px) scale(0.96); padding: 1.5rem 1rem; }
 			.modal-image { width: calc(100% + 2rem); height: 180px; margin: -1.5rem -1rem 1.5rem; }
             
-            /* Εδώ μικραίνουν δραστικά τα λογότυπα μόνο στο κινητό */
             .brand-link { max-width: 70%; }
             .brand-logo { height: 22px; } 
 		}
@@ -287,7 +284,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             <p class="subtitle">Ένας πρακτικός οδηγός για το πώς το πέτρωμα επηρεάζει τη ρίζα, το νερό και τη συμπεριφορά του αμπελιού σας.</p>
         </section>
 
-        <!-- Ενότητα 2 (ΠΡΩΗΝ 5): Το Terroir & Ο Χάρτης -->
+        <!-- Ενότητα 2 (ΠΡΩΗΝ 5): Το Terroir & Ο Χάρτης (Split-Screen Modern Layout) -->
         <section id="terroir" class="content-section">
             <div class="section-heading" style="margin-bottom: 2.5rem;">
                 <div><p class="section-kicker">01 / Το Επιστημονικο Υποβαθρο</p><h2>{intro.frontmatter.title}</h2></div>
