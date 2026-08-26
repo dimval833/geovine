@@ -150,8 +150,8 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .modal-image { display: block; width: calc(100% + 5rem); height: 220px; margin: -2.5rem -2.5rem 2rem; object-fit: cover; }
         .modal-backdrop.active .modal-content { transform: translateY(0) scale(1); }
         
-        /* ΝΕΑ ΚΛΑΣΗ ΓΙΑ ΤΟ ΥΠΟΜΝΗΜΑ */
-        .mapping-legend { display: block; max-width: 50%; height: auto; margin: 1rem 0 1.5rem; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        /* ΝΕΑ ΚΛΑΣΗ ΓΙΑ ΤΟ ΥΠΟΜΝΗΜΑ - Πιο σφιχτά περιθώρια */
+        .mapping-legend { display: block; max-width: 50%; height: auto; margin: 0.25rem 0 1.25rem; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 
         .map-zoom-wrapper { position: relative; width: 100%; height: 65vh; border-radius: 12px; overflow: hidden; background: #e9e5de; box-shadow: inset 0 0 10px rgba(0,0,0,0.1); }
         .map-zoom-container { width: 100%; height: 100%; overflow: auto; cursor: grab; scrollbar-width: none; user-select: none; }
@@ -291,7 +291,6 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             </div>
         </section>
 
-        <!-- Εδώ μπήκε η προσθήκη της εικόνας για το υπόμνημα στα pop-ups -->
         {rocks.map((rock: any, index: number) => {
             const rockId = `rock-${index}`;
             return (
@@ -299,20 +298,23 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
                     <div class="modal-content" onclick="event.stopPropagation()">
                         <button class="close-btn" onclick={`closeModal('${rockId}')`}>✕</button>
                         <img class="modal-image" src={`${import.meta.env.BASE_URL}${rock.frontmatter.image.replace(/^\//, '')}`} alt={rock.frontmatter.title} />
-                        <h2 style="margin-top: 0;">{rock.frontmatter.title}</h2>
-                        <div class="tags">
-                            {rock.frontmatter.varieties?.map((v: string) => (
-                                <span class="tag">{v}</span>
-                            ))}
-                        </div>
                         
-                        <!-- Η νέα εικόνα του υπομνήματος -->
+                        <h2 style="margin-top: 0; margin-bottom: 0.25rem;">{rock.frontmatter.title}</h2>
+                        
+                        <!-- Η εικόνα του υπομνήματος μεταφέρθηκε ΑΚΡΙΒΩΣ κάτω από τον τίτλο -->
                         <img 
                             class="mapping-legend" 
                             src={`${import.meta.env.BASE_URL}mappings/${rock.frontmatter.image.replace(/^\//, '')}`} 
                             alt={`Υπόμνημα χάρτη - ${rock.frontmatter.title}`} 
                             loading="lazy" 
                         />
+
+                        <!-- Οι ποικιλίες (tags) πήγαν αμέσως μετά για να μη διακόπτουν την οπτική ροή -->
+                        <div class="tags" style="margin-top: 0; margin-bottom: 1.5rem;">
+                            {rock.frontmatter.varieties?.map((v: string) => (
+                                <span class="tag">{v}</span>
+                            ))}
+                        </div>
                         
                         <Fragment set:html={rock.compiledContent()} />
                     </div>
