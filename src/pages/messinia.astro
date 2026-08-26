@@ -150,6 +150,9 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .modal-image { display: block; width: calc(100% + 5rem); height: 220px; margin: -2.5rem -2.5rem 2rem; object-fit: cover; }
         .modal-backdrop.active .modal-content { transform: translateY(0) scale(1); }
         
+        /* ΝΕΑ ΚΛΑΣΗ ΓΙΑ ΤΟ ΥΠΟΜΝΗΜΑ */
+        .mapping-legend { display: block; max-width: 50%; height: auto; margin: 1rem 0 1.5rem; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+
         .map-zoom-wrapper { position: relative; width: 100%; height: 65vh; border-radius: 12px; overflow: hidden; background: #e9e5de; box-shadow: inset 0 0 10px rgba(0,0,0,0.1); }
         .map-zoom-container { width: 100%; height: 100%; overflow: auto; cursor: grab; scrollbar-width: none; user-select: none; }
         .map-zoom-container::-webkit-scrollbar { display: none; }
@@ -288,6 +291,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             </div>
         </section>
 
+        <!-- Εδώ μπήκε η προσθήκη της εικόνας για το υπόμνημα στα pop-ups -->
         {rocks.map((rock: any, index: number) => {
             const rockId = `rock-${index}`;
             return (
@@ -301,6 +305,15 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
                                 <span class="tag">{v}</span>
                             ))}
                         </div>
+                        
+                        <!-- Η νέα εικόνα του υπομνήματος -->
+                        <img 
+                            class="mapping-legend" 
+                            src={`${import.meta.env.BASE_URL}mappings/${rock.frontmatter.image.replace(/^\//, '')}`} 
+                            alt={`Υπόμνημα χάρτη - ${rock.frontmatter.title}`} 
+                            loading="lazy" 
+                        />
+                        
                         <Fragment set:html={rock.compiledContent()} />
                     </div>
                 </div>
