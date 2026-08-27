@@ -79,7 +79,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             color: var(--text); 
             padding: 0.4rem 0.5rem; 
             border-radius: 999px; 
-            font-size: 0.74rem; /* Ένα τσακ πιο προσαρμοσμένο */
+            font-size: 0.74rem; 
             font-weight: 700; 
             letter-spacing: -0.03em; 
             text-decoration: none; 
@@ -109,7 +109,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .section-heading > p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
         .content-section { scroll-margin-top: 6rem; margin-bottom: 7rem; }
 
-        /* FULL BLEED SPLIT-SCREEN - ΧΩΡΙΣ ΚΑΜΠΥΛΕΣ ΣΤΙΣ ΑΚΡΕΣ */
+        /* FULL BLEED SPLIT-SCREEN ΜΕ ΤΟ MAPCROP.WEBP */
         .terroir-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -130,11 +130,9 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         }
         .map-card-bleed img { 
             width: 100%; 
-            height: calc(100% + 120px); 
+            height: 100%; 
             display: block; 
             object-fit: cover; 
-            object-position: center 80%; 
-            margin-top: -60px;
         }
         .map-hint { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); color: white; padding: 2rem 1rem 1.5rem; text-align: center; font-size: 0.85rem; font-weight: 600; pointer-events: none;}
         
@@ -155,7 +153,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* RESPONSIVE VINE BADGE (ΜΕΓΑΛΟ ΣΤΟ PC, ~50% ΣΕ TABLET/ΚΙΝΗΤΟ) */
+        /* RESPONSIVE VINE BADGE */
         .vine-badge {
             height: 52px;
             width: auto;
@@ -208,7 +206,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 6px 20px rgba(107,35,58,0.25);
             width: fit-content;
-            margin-left: auto; /* Δεξιά στοίχιση κουμπιού */
+            margin-left: auto; 
         }
         .read-more-btn:hover { 
             background: var(--primary-dark); 
@@ -326,7 +324,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         @media (max-width: 1200px) {
             .brand-link { max-width: 70%; }
             .brand-logo { height: 24px; }
-            .vine-badge { height: 26px; } /* ~50% σε tablets */
+            .vine-badge { height: 26px; } 
         }
 
         /* Τα tablets διατηρούν δομή PC (δύο στήλες), μόνο τα κινητά (<600px) στοιβάζονται κάθετα */
@@ -340,12 +338,11 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         @media (max-width: 600px) {
             .terroir-layout { grid-template-columns: 1fr; gap: 2rem; }
             .map-card-bleed { min-height: 300px; max-height: 320px; border-radius: 0; } 
-            .map-card-bleed img { margin-top: 0; height: 100%; object-position: center; }
             .terroir-text-wrapper { padding-top: 3rem; padding-left: 1rem; padding-right: 1rem; text-align: left !important; }
             .section-01-right { text-align: left !important; }
             .section-01-right .section-kicker { margin-left: 0 !important; }
             .read-more-btn { margin-left: 0 !important; }
-            .vine-badge { height: 26px; } /* ~50% σε κινητά */
+            .vine-badge { height: 26px; } 
             
 			.site-header { position: fixed; inset: 0 0 auto; top: 0; z-index: 50; box-sizing: border-box; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65rem; padding: 0.85rem 1rem; background: rgba(255, 255, 255, 0.85); }
 			.menu-toggle { display: block; position: static; }
@@ -393,13 +390,13 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         <!-- Ενότητα: Hero & Terroir Split-Screen -->
         <section id="terroir" class="content-section" style="margin-bottom: 7rem;">
             <div class="terroir-layout">
-                <!-- Αριστερή στήλη: Ο Χάρτης κολλημένος πανω-αριστερά χωρίς καμπύλες -->
+                <!-- Αριστερή στήλη: Ο Χάρτης με το mapcrop.webp χωρίς περιθώρια/καμπύλες -->
                 <div class="map-card-bleed" onclick="openModal('map-modal')" aria-label="Άνοιγμα χάρτη σε πλήρη οθόνη">
-                    <img src={`${import.meta.env.BASE_URL}map.webp`} alt="Γεωλογικός Χάρτης Τριφυλίας" loading="lazy" draggable="false" />
+                    <img src={`${import.meta.env.BASE_URL}mapcrop.webp`} alt="Γεωλογικός Χάρτης Τριφυλίας" loading="lazy" draggable="false" />
                     <div class="map-hint">🔍 Πατήστε για μεγέθυνση χάρτη</div>
                 </div>
                 
-                <!-- Δεξιά στήλη: Με το vine.png από πάνω επάνω, κενό ανάσα, και δεξιά στοίχιση στο Section 01 -->
+                <!-- Δεξιά στήλη: Με το vine.png επάνω, κενό ανάσα, και δεξιά στοίχιση στο Section 01 -->
                 <div class="terroir-text-wrapper">
                     <img src={`${import.meta.env.BASE_URL}vine.png`} alt="Vine Icon" class="vine-badge" />
                     
@@ -411,9 +408,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
                         <p class="section-kicker">01 / Το Επιστημονικο Υποβαθρο</p>
                         <h2 style="margin: 0; font-size: clamp(1.6rem, 2.5vw, 2.2rem);">{intro.frontmatter.title}</h2>
                     </div>
-                    <p style="color: #555; font-size: 1.05rem; margin-top: 0.75rem; line-height: 1.6; text-align: right;">
-                        Μάθετε πώς το μητρικό πέτρωμα διαμορφώνει το φυσικό περιβάλλον της ρίζας και ρυθμίζει τις κρίσιμες λειτουργίες του αμπελιού στη Μεσσηνία.
-                    </p>
+                    
                     <div>
                         <button class="read-more-btn" onclick="openModal('intro-modal')">
                             Διαβάστε περισσότερα →
@@ -437,7 +432,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         <!-- Τα υπόλοιπα sections κλεισμένα στο padded-content για να έχουν τα περιθώριά τους -->
         <div class="padded-content">
 
-            <!-- Modal Popup Google Maps Style (Zoom & Pan) -->
+            <!-- Modal Popup Google Maps Style (Zoom & Pan - Χρησιμοποιεί τον πλήρη map.webp) -->
             <div id="map-modal" class="modal-backdrop" onclick="closeModal('map-modal')">
                 <div class="modal-content" style="max-width: 1000px; padding: 1.5rem;" onclick="event.stopPropagation()">
                     <button class="close-btn" onclick="closeModal('map-modal')">✕</button>
