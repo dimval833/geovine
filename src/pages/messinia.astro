@@ -255,7 +255,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
 
         .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .modal-backdrop.active { opacity: 1; pointer-events: auto; }
-        .modal-content { background: var(--card-bg); width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; border-radius: 20px; padding: 2.5rem; position: relative; transform: translateY(50px) scale(0.95); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .modal-content { box-sizing: border-box; margin: auto; background: var(--card-bg); width: 90%; max-width: 600px; max-height: 85vh; max-height: 85dvh; overflow-y: auto; border-radius: 20px; padding: 2.5rem; position: relative; transform: translateY(50px) scale(0.95); transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
         .modal-image { display: block; width: calc(100% + 5rem); height: 220px; margin: -2.5rem -2.5rem 2rem; object-fit: cover; }
         .modal-backdrop.active .modal-content { transform: translateY(0) scale(1); }
         
@@ -372,6 +372,23 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             .brand-link { max-width: 70%; }
             .brand-logo { height: 22px; } 
 		}
+
+        /* --- ΕΙΔΙΚΗ ΡΥΘΜΙΣΗ ΜΟΝΟ ΓΙΑ ΚΙΝΗΤΑ ΣΕ ΟΡΙΖΟΝΤΙΑ ΘΕΣΗ (LANDSCAPE) --- */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .modal-content {
+                padding: 1.2rem;
+                max-height: 90vh;
+                max-height: 90dvh;
+            }
+            .modal-image {
+                height: 90px; /* Πολύ πιο στενή εικόνα για να φαίνεται αμέσως το κείμενο */
+                margin: -1.2rem -1.2rem 1.2rem;
+            }
+            .close-btn {
+                top: 10px;
+                right: 15px;
+            }
+        }
     </style>
 </head>
 <body>
