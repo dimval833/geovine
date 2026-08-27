@@ -709,19 +709,38 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             if(modal) {
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden'; 
+                
+                // ΑΥΤΟΜΑΤΟ ΖΟΥΜ 25% ΜΟΛΙΣ ΑΝΟΙΞΕΙ Ο ΧΑΡΤΗΣ
+                if (id === 'map-modal') {
+                    mapScale = 1.25;
+                    const img = document.getElementById('map-img-zoomable');
+                    if(img) {
+                        img.style.width = '125%';
+                        
+                        // Κεντράρει αυτόματα τον χάρτη για να μη δείχνει την πάνω-αριστερή γωνία
+                        setTimeout(() => {
+                            const container = document.getElementById('map-scroll-container');
+                            if(container) {
+                                container.scrollLeft = (img.offsetWidth - container.offsetWidth) / 2;
+                                container.scrollTop = (img.offsetHeight - container.offsetHeight) / 2;
+                            }
+                        }, 50);
+                    }
+                }
             }
         }
         
-        let mapScale = 1;
+        let mapScale = 1.25; // Η νέα αρχική μας τιμή
         function zoomMap(step) {
             mapScale += step;
-            if (mapScale < 1) mapScale = 1;
+            if (mapScale < 1) mapScale = 1; // Επιτρέπουμε να κάνει zoom out στο 100% αν το επιθυμεί
             if (mapScale > 4) mapScale = 4;
             
             const img = document.getElementById('map-img-zoomable');
             if(img) img.style.width = (mapScale * 100) + '%';
         }
 
+        // ... (Ο κώδικας για το σύρσιμο / dragging παραμένει ακριβώς ίδιος εδώ) ...
         const mapContainer = document.getElementById('map-scroll-container');
         let isDownMap = false;
         let startXMap, startYMap, sLeftMap, sTopMap;
@@ -774,10 +793,14 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             if(modal) {
                 modal.classList.remove('active');
                 document.body.style.overflow = ''; 
+                
+                // Επαναφορά στο 125% στα κρυφά, αφού κλείσει (για να μην κάνει "άλμα" μπροστά του)
                 if (id === 'map-modal') {
-                    mapScale = 1;
-                    const img = document.getElementById('map-img-zoomable');
-                    if(img) img.style.width = '100%';
+                    setTimeout(() => {
+                        mapScale = 1.25;
+                        const img = document.getElementById('map-img-zoomable');
+                        if(img) img.style.width = '125%';
+                    }, 300);
                 }
             }
         }
@@ -788,9 +811,11 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
                 if (activeModal) {
                     activeModal.classList.remove('active');
                     if (activeModal.id === 'map-modal') {
-                        mapScale = 1;
-                        const img = document.getElementById('map-img-zoomable');
-                        if(img) img.style.width = '100%';
+                        setTimeout(() => {
+                            mapScale = 1.25;
+                            const img = document.getElementById('map-img-zoomable');
+                            if(img) img.style.width = '125%';
+                        }, 300);
                     }
                 }
                 document.body.style.overflow = '';
