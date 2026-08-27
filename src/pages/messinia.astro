@@ -86,6 +86,14 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             white-space: nowrap; 
             transition: color 0.2s, background 0.2s; 
         }
+
+        /* Αύξηση μεγέθους γραμματοσειράς ΜΟΝΟ για οθόνες από 1200px και πάνω */
+        @media (min-width: 1200px) {
+            .main-nav a { 
+                font-size: 0.9rem; /* Μπορείς να παίξεις με το 0.85rem ή 0.9rem */
+                padding: 0.5rem 0.8rem; /* Δίνουμε και λίγο παραπάνω αέρα γύρω από τα γράμματα */
+            }
+        }
         .main-nav a:hover, .main-nav a:focus-visible { color: white; background: var(--primary); }
         
         .container { box-sizing: border-box; width: 100%; max-width: 100%; margin: 0 auto; padding: 0; }
@@ -408,7 +416,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
                     </div>
                     
                     <p style="color: #555; font-size: 1.05rem; margin-top: 0.75rem; line-height: 1.6; text-align: right;">
-                        Μάθετε πώς το μητρικό πέτρωμα διαμορφώνει το φυσικό περιβάλλον της ρίζας και ρυθμίζει τις κρίσιμες λειτουργίες του αμπελιού στη Μεσσηνία.
+                        Μάθετε πώς το πέτρωμα διαμορφώνει το φυσικό περιβάλλον της ρίζας και ρυθμίζει τις κρίσιμες λειτουργίες του αμπελιού.
                     </p>
                     
                     <div style="display: flex; justify-content: flex-end;">
