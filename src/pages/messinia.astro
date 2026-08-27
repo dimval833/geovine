@@ -109,7 +109,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         .section-heading > p { max-width: 360px; margin: 0; color: #6a665f; font-size: 0.9rem; }
         .content-section { scroll-margin-top: 6rem; margin-bottom: 7rem; }
 
-        /* FULL BLEED SPLIT-SCREEN - ΧΩΡΙΣ ΚΑΜΠΥΛΕΣ ΣΤΙΣ ΑΚΡΕΣ */
+        /* FULL BLEED SPLIT-SCREEN ΜΕ ΤΟ MAPCROP.WEBP */
         .terroir-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -153,25 +153,14 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ΔΙΑΓΩΝΙΟ PATTERN ΜΕ 3 ΤΣΑΜΠΙΑ (ΕΚΚΕΝΤΡΑ ΤΟΠΟΘΕΤΗΜΕΝΑ) */
-        .vine-diagonal-cluster {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 1.5rem;
-            padding-left: 0.5rem;
-        }
-        .vine-badge-diag {
-            height: 40px;
+        /* RESPONSIVE VINE BADGE */
+        .vine-badge {
+            height: 52px;
             width: auto;
             object-fit: contain;
-            opacity: 0.85;
-            transition: opacity 0.2s;
+            margin-bottom: 1.25rem;
+            display: block;
         }
-        /* Δημιουργία διαγώνιας κλιμάκωσης */
-        .vine-badge-diag:nth-child(1) { transform: translateY(0px); }
-        .vine-badge-diag:nth-child(2) { transform: translateY(10px); }
-        .vine-badge-diag:nth-child(3) { transform: translateY(20px); }
 
         .terroir-text-wrapper h1 { 
             margin: 0.5rem 0 1.25rem; 
@@ -335,7 +324,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
         @media (max-width: 1200px) {
             .brand-link { max-width: 70%; }
             .brand-logo { height: 24px; }
-            .vine-badge-diag { height: 26px; } 
+            .vine-badge { height: 26px; } 
         }
 
         /* Τα tablets διατηρούν δομή PC (δύο στήλες), μόνο τα κινητά (<600px) στοιβάζονται κάθετα */
@@ -353,7 +342,7 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             .section-01-right { text-align: left !important; }
             .section-01-right .section-kicker { margin-left: 0 !important; }
             .read-more-btn { margin-left: 0 !important; }
-            .vine-badge-diag { height: 26px; } 
+            .vine-badge { height: 26px; } 
             
 			.site-header { position: fixed; inset: 0 0 auto; top: 0; z-index: 50; box-sizing: border-box; width: 100%; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.65rem; padding: 0.85rem 1rem; background: rgba(255, 255, 255, 0.85); }
 			.menu-toggle { display: block; position: static; }
@@ -407,14 +396,9 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
                     <div class="map-hint">🔍 Πατήστε για μεγέθυνση χάρτη</div>
                 </div>
                 
-                <!-- Δεξιά στήλη: Με τη διαγώνια γραμμή από 3 τσαμπιά, δεξιά στοίχιση στο Section 01 -->
+                <!-- Δεξιά στήλη: Με το vine.png επάνω, κενό ανάσα, και δεξιά στοίχιση στο Section 01 -->
                 <div class="terroir-text-wrapper">
-                    <!-- Διαγώνιο pattern με 3 τσαμπιά -->
-                    <div class="vine-diagonal-cluster">
-                        <img src={`${import.meta.env.BASE_URL}vine.png`} alt="Vine Icon" class="vine-badge-diag" />
-                        <img src={`${import.meta.env.BASE_URL}vine.png`} alt="Vine Icon" class="vine-badge-diag" />
-                        <img src={`${import.meta.env.BASE_URL}vine.png`} alt="Vine Icon" class="vine-badge-diag" />
-                    </div>
+                    <img src={`${import.meta.env.BASE_URL}vine.png`} alt="Vine Icon" class="vine-badge" />
                     
                     <p class="eyebrow">Γεωλογία • Αμπελουργία • Μεσσηνία</p>
                     <h1>GeoVine Messinia Terroirs</h1>
