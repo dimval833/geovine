@@ -434,10 +434,14 @@ const galleryImages = Object.values(import.meta.glob('../gallery/*.{jpg,jpeg,png
             </div>
         </section>
 
-        <!-- Modal Popup για το κείμενο της γεωλογίας (Intro) -->
+        <!-- Modal Popup για το κείμενο της γεωλογίας (Intro) ΜΕ ΕΙΚΟΝΑ HEADER -->
         <div id="intro-modal" class="modal-backdrop" onclick="closeModal('intro-modal')">
             <div class="modal-content" onclick="event.stopPropagation()">
                 <button class="close-btn" onclick="closeModal('intro-modal')">✕</button>
+                
+                <!-- Η νέα λωρίδα χάρτη (header) για το modal -->
+                <img class="modal-image" src={`${import.meta.env.BASE_URL}mapcrop.webp`} alt="Μεσσηνιακό Terroir" style="object-position: center 30%;" />
+                
                 <h2 style="margin-top: 0; color: var(--primary);">{intro.frontmatter.title}</h2>
                 <div style="margin-top: 1.5rem; color: var(--text);">
                     <Fragment set:html={intro.compiledContent()} />
